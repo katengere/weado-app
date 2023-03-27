@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+body,
+.offcanvas,
+.dropdown-menu,
+.navbar-toggler {
+    background-color: #296F56;
+}
+
+.logoImg {
+    border-radius: 30%;
+}
