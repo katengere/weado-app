@@ -3,7 +3,8 @@
 body,
 .offcanvas,
 .dropdown-menu,
-.navbar-toggler {
+.navbar-toggler,
+.card {
     background-color: #296F56;
 }
 

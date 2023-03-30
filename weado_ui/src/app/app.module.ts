@@ -7,6 +7,7 @@ import { WeadoHomeComponent } from './components/weado-home/weado-home.component
 import { AboutComponent } from './components/about/about.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ContactsComponent } from './components/contacts/contacts.component';
     WeadoHomeComponent,
     AboutComponent,
     ProjectsComponent,
-    ContactsComponent
+    ContactsComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     BrowserModule,
