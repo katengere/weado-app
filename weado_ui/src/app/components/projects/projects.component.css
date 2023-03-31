@@ -1,0 +1,12 @@
+a {
+    color: white;
+}
+
+.nav .active {
+    color: black !important;
+    background-color: rgb(161, 156, 156) !important;
+}
+
+.nav .nav-item a:hover {
+    color: black;
+}

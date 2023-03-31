@@ -1,73 +1,73 @@
 <div class="row">
     <nav class="navbar navbar-expand-md navbar-light" style="background-color: rgb(161, 156, 156);">
-        <div class="container-fluid">
-            <a class="navbar-brand" [routerLink]="['']" routerLinkActive="active">
-                <img src="../assets/weadoLogo-Croped.png" class="logoImg" style="max-height: 40px;" alt="weadoLogo" srcset="">
-            </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+        <a class="navbar-brand" [routerLink]="['']" routerLinkActive="active">
+            <img src="../assets/weadoLogo-Croped.png" class="logoImg" style="max-height: 40px;" alt="weadoLogo" srcset="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-            <div class="offcanvas offcanvas-start" style="width: 60%;" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
-                        <img src="../assets/weadoLogo-Croped.png" [routerLink]="['']" routerLinkActive="active" class="logoImg" style="max-height: 60px; width: 60px;" alt="weadoLogo" srcset="">
-                    </h5>
-                    <button type="button" class="btn-close" style="color: red;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body text-center" style="justify-content: space-between;">
-                    <ul class="navbar-nav">
-                        <!-- <li class="nav-item">
+        <div class="offcanvas offcanvas-start" style="width: 60%;" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+                    <img src="../assets/weadoLogo-Croped.png" [routerLink]="['']" routerLinkActive="active" class="logoImg" style="max-height: 60px; width: 60px;" alt="weadoLogo" srcset="">
+                </h5>
+                <button type="button" class="btn-close" style="color: red;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body text-center" style="justify-content: space-between;">
+                <ul class="navbar-nav">
+                    <!-- <li class="nav-item">
                           <a class="nav-link active text-black" aria-current="page" href="#" data-bs-dismiss="offcanvas">
                               <i class="fa fa-home"></i>
                           </a>
                       </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['projects', currentYear]" routerLinkActive="active" data-bs-dismiss="offcanvas">
-                                <i class="fa fa-tasks"></i> Miradi
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['about']" routerLinkActive="active" data-bs-dismiss="offcanvas">
-                                <i class="fa fa-info-circle"></i> Kuhusu
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" [routerLink]="['contacts']" routerLinkActive="active" data-bs-dismiss="offcanvas">
-                                <i class="fa fa-mobile-alt"></i> Mawasiliano
-                            </a>
-                        </li>
-                    </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['projects', currentYear]" routerLinkActive="active" data-bs-dismiss="offcanvas">
+                            <i class="fa fa-tasks"></i> PROJECTS
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['about']" routerLinkActive="active" data-bs-dismiss="offcanvas">
+                            <i class="fa fa-info-circle"></i> ABOUT
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['contacts']" routerLinkActive="active" data-bs-dismiss="offcanvas">
+                            <i class="fa fa-mobile-alt"></i> CONTACTS
+                        </a>
+                    </li>
+                </ul>
 
-                    <ul class="navbar-nav">
-                        <li class="dropdown nav-item dropstart">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <ul class="navbar-nav">
+                    <li class="dropdown nav-item">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                               <i class="fa fa-user-ninja"></i>
                           </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li>
-                                    <a class="dropdown-item" href="#" data-bs-dismiss="offcanvas">
-                                        <i class="fa fa-unlock"></i> Login
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#" data-bs-dismiss="offcanvas">
-                                        <i class="fa fa-user"></i> Samia
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+                        <ul class="dropdown-menu dropdown-menu-end" style="background-color: rgb(161, 156, 156);" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item" [routerLink]="['/admin']" routerLinkActive="active" data-bs-dismiss="offcanvas">
+                                    <i class="fa fa-unlock"></i> Login
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" data-bs-dismiss="offcanvas">
+                                    <i class="fa fa-user"></i> personName
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
+
     </nav>
 </div>
 <div class="row">
     <router-outlet></router-outlet>
 </div>
 <div class="row">
-    <footer class="col-12 text-center">
+    <footer class="col-12 card-header text-center">
         Copyright &copy; WEADO <br> 2023
     </footer>
 </div>

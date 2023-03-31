@@ -6,6 +6,11 @@ body,
 .navbar-toggler,
 .card {
     background-color: #296F56;
+    color: white;
+}
+
+a .active {
+    color: black;
 }
 
 .logoImg {

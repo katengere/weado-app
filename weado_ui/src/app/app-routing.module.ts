@@ -16,7 +16,8 @@ const routes: Routes = [
       {path:':year', component:ProjectDetailsComponent}
     ]
   },
-  {path:'contacts', component:ContactsComponent}
+  {path:'contacts', component:ContactsComponent},
+  {path:'admin', loadChildren: ()=>import('./admin/admin.module').then(module=>module.AdminModule)}
 ];
 
 @NgModule({

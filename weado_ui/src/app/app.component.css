@@ -1,0 +1,16 @@
+li a,
+.navbar-nav .btn {
+    /* background-color: #296F56;
+    border-radius: 30%; */
+    color: white !important;
+}
+
+li a:hover,
+.navbar-nav .btn:hover {
+    color: black !important;
+    border: 1px solid white;
+}
+
+.navbar-nav .active {
+    color: black !important;
+}

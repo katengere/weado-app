@@ -1,19 +1,17 @@
-<div class="row">
-    <div class="col-12" *ngFor="let project of projects">
-        <div class="card m-1">
-            <div class="card-header">
-                {{project.date | date}}
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{project.title}}</h5>
-                <div class="card-text d-flex justify-content-between">
-                    <section>
-                        {{project.content}}
-                    </section>
-                    <section>
-                        projects reports
-                    </section>
-                </div>
+<div class="col-12" *ngFor="let project of projects">
+    <div class="card">
+        <div class="card-header">
+            {{project.date | date}}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{project.title}}</h5>
+            <div class="card-text d-flex justify-content-between">
+                <section>
+                    {{project.content}}
+                </section>
+                <section>
+                    projects reports
+                </section>
             </div>
         </div>
     </div>
