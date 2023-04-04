@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Project } from '../Classes-Interfaces/project';
+import { environment } from "../../environments/environment";
 
-const apiUrl = 'http://localhost:8000/weado';
+const apiUrl = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class ProjectsService {
   constructor(private http: HttpClient) { }
 
   get projects():Observable<Project[]>{
-    return this.http.get<Project[]>(apiUrl+'/projects')
+    return this.http.get<Project[]>(apiUrl+'/weado/projects')
   }
   getProject(year:number):Observable<Project>{
-    return this.http.get<Project>(apiUrl+'/projects/'+year);
+    return this.http.get<Project>(apiUrl+'/weado/projects/'+year);
   }
 }
