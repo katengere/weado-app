@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectsService } from './services/projects.service';
 import { MessageService } from './services/message.service';
 import { StorageService } from './admin/services/storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'weado-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
     private storageService: StorageService
     ){}
   ngOnInit(){
+    console.log(environment.production);
      this.projectsService.projects.subscribe(
       projects=> {
         this.years =projects.map(p=>p.year).filter((year,i,arr)=>arr.indexOf(year)==i);
