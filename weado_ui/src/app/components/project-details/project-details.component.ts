@@ -21,7 +21,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.route.params.subscribe((param)=>{
       this.projectsService.projects.subscribe(
         projects=> this.projects = projects.filter(project=>project.year == parseInt(param['year'])),
-        error=>this.msgService.message(error)
+        error=>this.msgService.message(error.message)
       )
     })
   }
