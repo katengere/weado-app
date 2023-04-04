@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Project, ProjectsService } from 'src/app/services/projects.service';
+import { MessageService } from 'src/app/services/message.service';
+import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'weado-projects',
@@ -8,11 +9,17 @@ import { Project, ProjectsService } from 'src/app/services/projects.service';
 })
 export class ProjectsComponent implements OnInit {
   years: number[] = [];
-  constructor(private projectsService: ProjectsService){
+  constructor(
+    private projectsService: ProjectsService,
+    private msgService: MessageService
+    ){
 
   }
   ngOnInit(): void {
-    this.years = this.projectsService.projects.map(p=>p.year).filter((year,i,arr)=>arr.indexOf(year)==i);
+     this.projectsService.projects.subscribe(
+      projects=> this.years = projects.map(p=>p.year).filter((year,i,arr)=>arr.indexOf(year)==i),
+      error=> this.msgService.message(error.message)
+    )
   }
 
 }

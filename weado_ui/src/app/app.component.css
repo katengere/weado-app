@@ -8,7 +8,7 @@ li a,
 li a:hover,
 .navbar-nav .btn:hover {
     color: black !important;
-    border: 1px solid white;
+    /* border: 1px solid white; */
 }
 
 .navbar-nav .active {

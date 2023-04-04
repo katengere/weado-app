@@ -1,8 +1,0 @@
-var express = require('express');
-var router = express.Router();
-var usersCtrl = require('../controllers/usersCtrl');
-
-/* GET users listing. */
-router.get('/', usersCtrl);
-
-module.exports = router;

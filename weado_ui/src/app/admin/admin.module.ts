@@ -5,12 +5,14 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { ManageComponent } from './components/manage/manage.component';
 
 
 @NgModule({
   declarations: [
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ManageComponent
   ],
   imports: [
     CommonModule,

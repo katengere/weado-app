@@ -1,7 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const indexCtrl = require('../controllers/indexCtrl');
+const ctrlIndex = require('../controllers/ctrlIndex');
+const ctrlAdmin = require('../controllers/admin');
+var ctrlProjects = require('../controllers/ctrlProjects');
+
+
 /* GET home page. */
-router.get('/', indexCtrl);
+router.get('/', ctrlIndex);
+
+/* GET users listing. */
+router.get('/projects', ctrlProjects.ctrlProjects);
+router.get('/projects/:year', ctrlProjects.ctrlProject);
+router.post('/admin', ctrlAdmin);
 
 module.exports = router;
