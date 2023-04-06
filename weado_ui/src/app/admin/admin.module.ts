@@ -6,13 +6,17 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ManageComponent } from './components/manage/manage.component';
+import { AddProjectComponent } from './components/add-project/add-project.component';
+import { ProjectListComponent } from './components/project-list/project-list.component';
 
 
 @NgModule({
   declarations: [
     RegisterComponent,
     LoginComponent,
-    ManageComponent
+    ManageComponent,
+    AddProjectComponent,
+    ProjectListComponent
   ],
   imports: [
     CommonModule,

@@ -13,4 +13,10 @@ li a:hover,
 
 .navbar-nav .active {
     color: black !important;
+    background-color: rgb(161, 156, 156) !important;
+}
+
+.navbar-nav .dropdown .dropdown-item .active {
+    background-color: rgb(161, 156, 156) !important;
+    /* color: black !important; */
 }

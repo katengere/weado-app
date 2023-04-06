@@ -1,0 +1,32 @@
+<div class="row align-content-md-center">
+    <div class="col-md-2"></div>
+    <form class="col-md-8" #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="mb-1">
+            <label for="Name" class="form-label"> Year</label>
+            <select class="form-control" name="year" [(ngModel)]="project.year">
+            <option class="form-control" *ngFor="let year of years" [value]="year">{{year}}</option>
+          </select>
+        </div>
+        <div class="mb-1">
+            <label for="title" class="form-label"> Title</label>
+            <input type="text" autocomplete="" name="title" #title="ngModel" [(ngModel)]="project.title" required class="form-control" placeholder="title">
+        </div>
+        <div class="mb-1">
+            <label for="content" class="form-label"> Content</label>
+            <textarea name="content" #content="ngModel" [(ngModel)]="project.content" required class="form-control" placeholder="content" cols="20" rows="5"></textarea>
+        </div>
+        <div class="mb-1">
+            <label for="reports" class="form-label"> Reports</label>
+            <input type="file" autocomplete="" name="reports" #reports="ngModel" [(ngModel)]="project.reports" required class="form-control" placeholder="reports">
+        </div>
+        <div class="mb-1">
+            <label for="images" class="form-label"> Images</label>
+            <input type="file" autocomplete="" name="images" #images="ngModel" [(ngModel)]="project.images" required class="form-control" placeholder="images">
+        </div>
+        <div class="mb-1">
+            <label for="date" class="form-label"> Date</label>
+            <input type="date" autocomplete="" name="date" #date="ngModel" [(ngModel)]="project.date" required class="form-control date">
+        </div>
+        <button type="submit" class="btn btn-primary float-end"><i class="fa fa-project-diagram"></i> Add Project!</button>
+    </form>
+</div>

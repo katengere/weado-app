@@ -1,1 +1,32 @@
-<weado-message [message]="message"></weado-message>
+<div class="row">
+    <form class="col-md-8" #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="mb-2">
+            <label for="Name" class="form-label"><i class="fa fa-user"></i> Name</label>
+            <input type="text" name="Name" #name="ngModel" [(ngModel)]="contact.name" class="form-control" required placeholder="Name">
+        </div>
+        <div class="mb-2">
+            <label for="email" class="form-label"><i class="fa fa-mail-bulk"></i> Email</label>
+            <input type="email" autocomplete="" name="email" #email="ngModel" [(ngModel)]="contact.email" required class="form-control" placeholder="Email">
+        </div>
+        <div class="mb-1">
+            <label for="message" class="form-label"><i class="fa fa-envelope"></i> Message</label>
+            <textarea name="message" #email="ngModel" [(ngModel)]="contact.message" required class="form-control" placeholder="Message" id="" cols="30" rows="10"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary float-end"><i class="fa fa-save"></i> Send!</button>
+    </form>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                OUR ADDRESS
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Region</h5>
+                <div class="card-text d-flex justify-content-between">
+                    <section>
+                        content
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

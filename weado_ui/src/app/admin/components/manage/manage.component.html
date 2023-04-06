@@ -1,1 +1,12 @@
-<p>manage works!</p>
+<div class="row">
+    <div class="col-md-2"></div>
+    <button [routerLink]="['add']" routerLinkActive="active" class="btn my-1 mx-1 col-md-4">
+      <i class="fa fa-plus-circle"></i> Add Project
+    </button>
+    <button [routerLink]="['/admin/manage']" routerLinkActive="active" class="btn my-1 mx-1 col-md-4">
+      <i class="fa fa-edit"></i> Manage
+    </button>
+</div>
+<div class="row">
+    <router-outlet></router-outlet>
+</div>

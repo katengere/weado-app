@@ -1,0 +1,12 @@
+.btn {
+    background-color: rgb(161, 156, 156) !important;
+    color: white;
+}
+
+.btn:hover {
+    color: black;
+}
+
+div .btn .active {
+    color: black !important;
+}

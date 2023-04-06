@@ -21,4 +21,10 @@ function ctrlProject(req, res, next) {
     console.log(project);
     res.status(200).json(project);
 }
-module.exports = { ctrlProjects, ctrlProject };
+
+function ctrlAddProject(req, res) {
+    const project = req.body;
+    projects.push(project);
+    res.status(201).json(project);
+}
+module.exports = { ctrlProjects, ctrlProject, ctrlAddProject };

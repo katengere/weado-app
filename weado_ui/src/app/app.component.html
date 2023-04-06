@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row fixed-top mx-1">
     <nav class="navbar navbar-expand-md navbar-light" style="background-color: rgb(161, 156, 156);">
 
         <a class="navbar-brand" [routerLink]="['']" routerLinkActive="active">
@@ -23,15 +23,16 @@
                           </a>
                       </li> -->
                     <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['about']" routerLinkActive="active" data-bs-dismiss="offcanvas">
+                            <i class="fa fa-info-circle"></i> ABOUT WEADO
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" [routerLink]="['projects', currentYear]" routerLinkActive="active" data-bs-dismiss="offcanvas">
                             <i class="fa fa-tasks"></i> PROJECTS
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['about']" routerLinkActive="active" data-bs-dismiss="offcanvas">
-                            <i class="fa fa-info-circle"></i> ABOUT
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" [routerLink]="['contacts']" routerLinkActive="active" data-bs-dismiss="offcanvas">
                             <i class="fa fa-mobile-alt"></i> CONTACTS
@@ -40,10 +41,15 @@
                 </ul>
 
                 <ul class="navbar-nav">
+                    <li class="dropdown nav-item" *ngIf="isLoggedIn()">
+                        <button class="btn dropdown-item" [routerLink]="['/admin/manage']" routerLinkActive="active" data-bs-dismiss="offcanvas">
+                            <i class="fa fa-user-edit"></i> Admin
+                        </button>
+                    </li>
                     <li class="dropdown nav-item">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="fa fa-user-ninja"></i>
-                          </button>
+                            <i class="fa fa-user-ninja"></i>
+                        </button>
                         <ul class="dropdown-menu dropdown-menu-end" style="background-color: rgb(161, 156, 156);" aria-labelledby="dropdownMenuButton1">
                             <li *ngIf="!isLoggedIn()">
                                 <a class="dropdown-item" [routerLink]="['/admin']" routerLinkActive="active" data-bs-dismiss="offcanvas">
@@ -67,9 +73,8 @@
         </div>
     </nav>
 </div>
-<div class="row">
+<div class="row" style="margin-top: 68px;">
     <router-outlet></router-outlet>
-    <ng-template #messageBox></ng-template>
 </div>
 <div class="row">
     <footer class="col-12 card-header mt-3 border-top text-center">

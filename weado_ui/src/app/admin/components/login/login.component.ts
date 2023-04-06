@@ -32,11 +32,10 @@ export class LoginComponent implements OnInit{
           this.router.navigateByUrl('admin/manage');
         },
         err=>{
-          this.msgService.message(err.message)
+          this.msgService.message(err.error.message)
         }
       )
-      this.user.name = '';
-      this.user.password = ''
+      form.resetForm();
     } else {
       this.msgService.message('Please fill out the whole form');
     }

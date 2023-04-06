@@ -10,6 +10,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { MessageComponent } from './components/message/message.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MessageComponent } from './components/message/message.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

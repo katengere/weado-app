@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
     private storageService: StorageService
     ){}
   ngOnInit(){
-    console.log(environment.production);
      this.projectsService.projects.subscribe(
       projects=> {
         this.years =projects.map(p=>p.year).filter((year,i,arr)=>arr.indexOf(year)==i);

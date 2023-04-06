@@ -12,5 +12,6 @@ router.get('/', ctrlIndex);
 router.get('/projects', ctrlProjects.ctrlProjects);
 router.get('/projects/:year', ctrlProjects.ctrlProject);
 router.post('/admin', ctrlAdmin);
+router.post('/admin/manage/add', ctrlProjects.ctrlAddProject);
 
 module.exports = router;

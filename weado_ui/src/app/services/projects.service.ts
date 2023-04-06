@@ -14,9 +14,12 @@ export class ProjectsService {
   constructor(private http: HttpClient) { }
 
   get projects():Observable<Project[]>{
-    return this.http.get<Project[]>(apiUrl+'/weado/projects')
+    return this.http.get<Project[]>(apiUrl+'/weado/projects');
   }
   getProject(year:number):Observable<Project>{
     return this.http.get<Project>(apiUrl+'/weado/projects/'+year);
+  }
+  addProject(project:Project): Observable<Project>{
+    return this.http.post<Project>(apiUrl+'/weado/admin/manage/add', project)
   }
 }
