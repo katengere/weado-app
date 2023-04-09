@@ -19,10 +19,10 @@ export class ProjectDetailsComponent implements OnInit {
 
   ngOnInit(){
     this.route.params.subscribe((param)=>{
-      this.projectsService.projects.subscribe(
-        projects=> this.projects = projects.filter(project=>project.year == parseInt(param['year'])),
-        error=>this.msgService.message(error.message)
-      )
+      this.projectsService.getProject(parseInt(param['year'])).subscribe({
+        next: projects=> this.projects = projects,
+        error: error=>this.msgService.message({title:'SERVER ERROR',text:error.message}, 'bg-danger')
+      })
     })
   }
 }

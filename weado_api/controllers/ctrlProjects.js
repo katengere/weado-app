@@ -17,9 +17,8 @@ function ctrlProjects(req, res, next) {
 
 function ctrlProject(req, res, next) {
     const year = req.params.year;
-    const project = projects.find(project => project.year == year);
-    console.log(project);
-    res.status(200).json(project);
+    const projectsList = projects.filter(project => project.year == year);
+    res.status(200).json(projectsList);
 }
 
 function ctrlAddProject(req, res) {

@@ -20,13 +20,14 @@ export class AppComponent implements OnInit {
     private storageService: StorageService
     ){}
   ngOnInit(){
-     this.projectsService.projects.subscribe(
-      projects=> {
+     this.projectsService.projects.subscribe({
+       next: projects=> {
         this.years =projects.map(p=>p.year).filter((year,i,arr)=>arr.indexOf(year)==i);
+        console.log(this.years);
         this.currentYear = Math.max(...this.years);
       },
-      error=>this.msgService.message(error.message)
-    );
+      error: error=>this.msgService.message({title:'SERVER ERROR', text:error.message}, 'bg-danger')
+     });
   }
 
   isLoggedIn():boolean{

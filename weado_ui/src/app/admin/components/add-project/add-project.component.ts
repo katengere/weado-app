@@ -29,16 +29,20 @@ export class AddProjectComponent {
 
   onSubmit(form:NgForm){
     if (!form.valid) {
-      return this.msgService.message('Please make sure to fill all required fields!');
+      return this.msgService.message({
+        title: 'FORM ERROR',
+        text: 'Please make sure to fill all required fields!'
+      }, 'bg-success', 'text-warning');
     }
     this.projectService.addProject(form.value).subscribe({
       next:(project)=>{
         form.resetForm();
+        this.msgService.message({title: 'SUCCESS', text: project.title.toUpperCase()+': Successful added'}, 'bg-success');
         this.router.navigateByUrl('/projects/'+project.year);
       },
       error:(err)=>{
         console.log(err);
-        this.msgService.message(err.message);
+        this.msgService.message({title: 'SERVER ERROR', text: err.message}, 'bg-success', 'text-danger');
       }
     });
 

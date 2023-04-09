@@ -28,16 +28,19 @@ export class LoginComponent implements OnInit{
       this.userService.login(this.user).subscribe(
         user=>{
           this.storageService.saveToken(user.name);
-
+          this.msgService.message({title:'SUCCESS', text:'Wellcome '+ user.name.toUpperCase()}, 'bg-success');
           this.router.navigateByUrl('admin/manage');
         },
         err=>{
-          this.msgService.message(err.error.message)
+          this.msgService.message({title:'SERVER ERROR' ,text: err.error.message}, 'bg-danger')
         }
       )
       form.resetForm();
     } else {
-      this.msgService.message('Please fill out the whole form');
+      this.msgService.message({
+        title:'FORM ERROR',
+        text: 'Please make sure to fill all required fields!'
+      }, 'bg-warning', 'text-danger');
     }
 
   }

@@ -16,10 +16,10 @@ export class ProjectsComponent implements OnInit {
 
   }
   ngOnInit(): void {
-     this.projectsService.projects.subscribe(
-      projects=> this.years = projects.map(p=>p.year).filter((year,i,arr)=>arr.indexOf(year)==i),
-      error=> this.msgService.message(error.message)
-    )
+     this.projectsService.projects.subscribe({
+       next:  projects=> this.years = projects.map(p=>p.year).filter((year,i,arr)=>arr.indexOf(year)==i),
+       error: error=> this.msgService.message({title: 'SERVER ERROR',text: error.message}, 'bg-danger')
+     })
   }
 
 }

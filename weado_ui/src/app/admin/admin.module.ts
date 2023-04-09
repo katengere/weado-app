@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ManageComponent } from './components/manage/manage.component';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import { ProjectListComponent } from './components/project-list/project-list.component';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ProjectListComponent } from './components/project-list/project-list.com
     LoginComponent,
     ManageComponent,
     AddProjectComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    AdminHomeComponent
   ],
   imports: [
     CommonModule,

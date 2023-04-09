@@ -11,7 +11,7 @@
         <div class="offcanvas offcanvas-start" style="width: 60%;" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
-                    <img src="../assets/weadoLogo-Croped.png" [routerLink]="['']" routerLinkActive="active" class="logoImg" style="max-height: 60px; width: 60px;" alt="weadoLogo" srcset="">
+                    <img src="../assets/weadoLogo-Croped.png" [routerLink]="['']" data-bs-dismiss="offcanvas" routerLinkActive="active" class="logoImg" style="max-height: 60px; width: 60px;" alt="weadoLogo" srcset="">
                 </h5>
                 <button type="button" class="btn-close" style="background-color: white;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
@@ -52,7 +52,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" style="background-color: rgb(161, 156, 156);" aria-labelledby="dropdownMenuButton1">
                             <li *ngIf="!isLoggedIn()">
-                                <a class="dropdown-item" [routerLink]="['/admin']" routerLinkActive="active" data-bs-dismiss="offcanvas">
+                                <a class="dropdown-item" [routerLink]="['/admin/login']" routerLinkActive="active" data-bs-dismiss="offcanvas">
                                     <i class="fa fa-sign-in-alt"></i> Login
                                 </a>
                             </li>

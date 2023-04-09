@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { MessageService } from 'src/app/services/message.service';
+import { Component, Inject, Input } from '@angular/core';
+import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import { Message } from 'src/app/Classes-Interfaces/message';
 
 @Component({
   selector: 'weado-message',
@@ -7,6 +8,8 @@ import { MessageService } from 'src/app/services/message.service';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent {
-  @Input() message: string = '';
-constructor(){}
+
+constructor(
+  @Inject(MAT_SNACK_BAR_DATA) public data: Message
+){}
 }

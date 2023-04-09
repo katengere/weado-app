@@ -11,6 +11,8 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { MessageComponent } from './components/message/message.component';
 import { FormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -26,9 +28,11 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NoopAnimationsModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [{provide: MAT_SNACK_BAR_DATA, useValue:MAT_SNACK_BAR_DATA}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

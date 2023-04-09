@@ -16,3 +16,13 @@ a .active {
 .logoImg {
     border-radius: 30%;
 }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -15,6 +15,6 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login(user: User):Observable<User>{
-    return this.http.post<User>(apiUrl+'/weado/admin', user);
+    return this.http.post<User>(apiUrl+'/weado/admin/login', user);
   }
 }
