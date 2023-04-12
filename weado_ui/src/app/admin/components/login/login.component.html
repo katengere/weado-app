@@ -2,14 +2,16 @@
     <div class="col-md-4"></div>
 
     <form class="col-md-4" #form="ngForm" (ngSubmit)="onSubmit(form)">
-        <div class="mb-3">
+        <div class="mb-1">
             <label for="Name" class="form-label"><i class="fa fa-user"></i> Name</label>
             <input type="text" name="Name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required placeholder="Name">
         </div>
-        <div class="mb-3">
+        <div class="mb-1">
             <label for="password" class="form-label"><i class="fa fa-passport"></i> Password</label>
             <input type="password" autocomplete="" name="password" #password="ngModel" [(ngModel)]="user.password" required class="form-control" placeholder="Nenosiri">
         </div>
-        <button type="submit" class="btn btn-primary float-end"><i class="fa fa-lock-open"></i> Login!</button>
+        <button type="submit" class="btn float-end text-white" style="background-color: rgb(161, 156, 156);">
+          <i class="fa fa-lock-open"></i> Login!
+        </button>
     </form>
 </div>

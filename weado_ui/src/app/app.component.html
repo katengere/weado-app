@@ -42,24 +42,14 @@
 
                 <ul class="navbar-nav">
                     <li class="dropdown nav-item" *ngIf="isLoggedIn()">
-                        <button class="btn dropdown-item" [routerLink]="['/admin/manage']" routerLinkActive="active" data-bs-dismiss="offcanvas">
-                            <i class="fa fa-user-edit"></i> Admin
-                        </button>
-                    </li>
-                    <li class="dropdown nav-item">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-user-ninja"></i>
-                        </button>
+                          <i class="fa fa-user-edit"></i> {{getUserName()}}
+                      </button>
                         <ul class="dropdown-menu dropdown-menu-end" style="background-color: rgb(161, 156, 156);" aria-labelledby="dropdownMenuButton1">
-                            <li *ngIf="!isLoggedIn()">
-                                <a class="dropdown-item" [routerLink]="['/admin/login']" routerLinkActive="active" data-bs-dismiss="offcanvas">
-                                    <i class="fa fa-sign-in-alt"></i> Login
-                                </a>
-                            </li>
-                            <li *ngIf="isLoggedIn()">
-                                <a class="dropdown-item" href="#" data-bs-dismiss="offcanvas">
-                                    <i class="fa fa-user"></i> {{getUserName()}}
-                                </a>
+                            <li class="dropdown nav-item">
+                                <button class="btn dropdown-item" [routerLink]="['/admin/manage']" routerLinkActive="active" data-bs-dismiss="offcanvas">
+                                  <i class="fa fa-user-"></i> Admin Panel
+                                </button>
                             </li>
                             <li *ngIf="isLoggedIn()">
                                 <a class="dropdown-item" (click)="removeUser()" href="#" data-bs-dismiss="offcanvas">
@@ -67,6 +57,11 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item" *ngIf="!isLoggedIn()">
+                        <a class="nav-link" [routerLink]="['/admin/login']" routerLinkActive="active" data-bs-dismiss="offcanvas">
+                            <i class="fa fa-sign-in-alt"></i> Login
+                        </a>
                     </li>
                 </ul>
             </div>

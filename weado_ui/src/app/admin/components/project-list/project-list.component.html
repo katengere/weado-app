@@ -1,1 +1,28 @@
-<p>project-list works!</p>
+<div class="table-responsive">
+    <table class="table table-hover text-white">
+        <thead>
+            <tr>
+                <th scope="col">Year</th>
+                <th scope="col">Title</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let project of projects; let i=index">
+                <tr>
+                    <th scope="row" [attr.rowspan]="project.projects.length+1">{{project.year}}</th>
+                </tr>
+                <tr *ngFor="let proj of project.projects">
+                    <td>
+                        {{proj.title}}
+                    </td>
+                    <td>
+                        <span class="btn bg-warning">edit</span>
+                        <span class="btn bg-danger" style="margin-left: 2px;">delete</span>
+                    </td>
+                </tr>
+            </ng-container>
+
+        </tbody>
+    </table>
+</div>

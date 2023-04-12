@@ -1,5 +1,26 @@
 <div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                WEADO ADDRESS
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">P.O.BOX 807 SHINYANGA</h5>
+                <div class="card-text d-flex justify-content-between">
+                    <section>
+                        <h6><i class="fa fa-phone"></i> +255754572677</h6>
+                        <h6><i class="fa fa-mail-bulk"></i> weado2014@gmail.com</h6>
+                        <h6><i class="fa fa-search-location"></i> Matata Road, Mwasele Area, House no 06</h6>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
     <form class="col-md-8" #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="mb-2">
+            <h3 class="text-white text-center">Leave A Message</h3>
+            <hr>
+        </div>
         <div class="mb-2">
             <label for="Name" class="form-label"><i class="fa fa-user"></i> Name</label>
             <input type="text" name="Name" #name="ngModel" [(ngModel)]="contact.name" class="form-control" required placeholder="Name">
@@ -12,21 +33,9 @@
             <label for="message" class="form-label"><i class="fa fa-envelope"></i> Message</label>
             <textarea name="message" #email="ngModel" [(ngModel)]="contact.message" required class="form-control" placeholder="Message" id="" cols="5" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary float-end"><i class="fa fa-save"></i> Send!</button>
+        <button type="submit" class="btn float-end text-white" style="background-color: rgb(161, 156, 156);">
+          <i class="fa fa-comment"></i> Send!
+        </button>
     </form>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                OUR ADDRESS
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Region</h5>
-                <div class="card-text d-flex justify-content-between">
-                    <section>
-                        content
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>

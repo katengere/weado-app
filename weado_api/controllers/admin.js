@@ -1,6 +1,5 @@
 let Users = [
-    { name: 'ndosy', password: 'ndosy123' },
-    { name: 'win', password: 'win1234' }
+    { name: 'admin', password: 'weado2014' },
 ];
 
 function login(req, res) {
