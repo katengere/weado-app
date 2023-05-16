@@ -7,6 +7,11 @@
 var app = require('../app');
 var debug = require('debug')('weado-app:server');
 var http = require('http');
+const mongoose = require('mongoose');
+const dbUrl = process.env.dbUrl;
+// let gfsProjects, gfsReports;
+mongoose.Promise = global.Promise;
+
 
 /**
  * Get port from environment and store in Express.
@@ -22,13 +27,24 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+// Connect MongoDB at default port 27017.
+mongoose.connect(dbUrl, {
+    useNewUrlParser: true
+}).then(
+    (res) => {
+        console.log('MongoDB Connection Succeeded to: ' + dbUrl);
+
+        /**
+         * Listen on provided port, on all network interfaces.
+         */
+        server.listen(port);
+        server.on('error', onError);
+        server.on('listening', onListening);
+
+    },
+    (err) => console.log('Error in DB connection: ' + err)
+);
 
 /**
  * Normalize a port into a number, string, or false.

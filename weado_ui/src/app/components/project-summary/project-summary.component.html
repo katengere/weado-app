@@ -4,13 +4,15 @@
             {{project.date | date}}
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{project.title}}</h5>
+            <h5 class="card-header">{{project.title}}</h5>
             <div class="card-text d-flex justify-content-between">
                 <section>
-                    {{project.content}}
+                    <h5 class="card-title">Project Content</h5>
+                    {{project.summary}}
                 </section>
-                <section>
-                    projects reports
+                <section *ngFor="let report of project.reportsId">
+                    <h5 class="card-title">Project Reports</h5>
+                    <p>{{report.originalname}}</p>
                 </section>
             </div>
         </div>

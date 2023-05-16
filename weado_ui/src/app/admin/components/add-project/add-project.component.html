@@ -1,32 +1,44 @@
-<div class="row align-content-md-center">
-    <div class="col-md-2"></div>
-    <form class="col-md-8" #form="ngForm" (ngSubmit)="onSubmit(form)">
-        <div class="mb-1">
-            <label for="Name" class="form-label"> Year</label>
-            <select class="form-control" name="year" [(ngModel)]="project.year">
-            <option class="form-control" *ngFor="let year of years" [value]="year">{{year}}</option>
-          </select>
+<h3 mat-dialog-title style="margin-top: 38px;"> Add Project </h3>
+<mat-dialog-content>
+    <form [formGroup]="projectForm" enctype="multipart/form-data" role="form">
+        <div formArrayName="author">
+            <div *ngFor="let auth of author.controls; let i = index" [formGroupName]="i">
+                <div class="mb-1">
+                    <label for="author" class="form-label"> Author {{i+1}}</label>
+                    <input type="text" formControlName="author" class="form-control" placeholder="author">
+                    <button class="btn btn-sm form-control" *ngIf="!(i==0)" (click)="removeAuthor(i)">
+                      <i class="fa fa-user-minus"></i>Remove Author {{i+1}}
+                    </button>
+                    <button class="btn btn-sm form-control" (click)="addAuthor()">
+                      <i class="fa fa-user-plus"></i>Add Author {{i+2}}
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="mb-1">
             <label for="title" class="form-label"> Title</label>
-            <input type="text" autocomplete="" name="title" #title="ngModel" [(ngModel)]="project.title" required class="form-control" placeholder="title">
+            <input type="text" formControlName="title" class="form-control" placeholder="title">
         </div>
         <div class="mb-1">
-            <label for="content" class="form-label"> Content</label>
-            <textarea name="content" #content="ngModel" [(ngModel)]="project.content" required class="form-control" placeholder="content" cols="5" rows="3"></textarea>
+            <label for="summary" class="form-label"> Summary</label>
+            <textarea formControlName="summary" class="form-control" placeholder="summary" cols="5" rows="3"></textarea>
         </div>
+
         <div class="mb-1">
-            <label for="reports" class="form-label"> Reports</label>
-            <input type="file" autocomplete="" name="reports" #reports="ngModel" [(ngModel)]="project.reports" required class="form-control" placeholder="reports">
-        </div>
-        <div class="mb-1">
-            <label for="images" class="form-label"> Images</label>
-            <input type="file" autocomplete="" name="images" #images="ngModel" [(ngModel)]="project.images" required class="form-control" placeholder="images">
+            <label for="files" class="form-label"> Files</label>
+            <input type="file" formControlName="files" (change)="imageInput($event)" class="form-control">
         </div>
         <div class="mb-1">
             <label for="date" class="form-label"> Date</label>
-            <input type="date" autocomplete="" name="date" #date="ngModel" [(ngModel)]="project.date" required class="form-control date">
+            <input type="date" formControlName="date" class="form-control date">
         </div>
-        <button type="submit" class="btn btn-primary float-end"><i class="fa fa-project-diagram"></i> Add Project!</button>
     </form>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-dialog-close class="btn btn-sm" style="margin-right: 1px;">
+    <i class="fa fa-window-close"></i>Close
+  </button>
+    <button mat-dialog-close (click)="onSubmit()" class="btn btn-sm">
+      <i class="fa fa-file-upload"></i> Upload!
+    </button>
+</mat-dialog-actions>

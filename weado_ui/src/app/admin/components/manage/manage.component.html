@@ -3,7 +3,7 @@
     <button [routerLink]="['/admin/manage']" routerLinkActive="active" class="btn mx-1 my-1 col-md-5">
       <i class="fa fa-edit"></i> Manage
     </button>
-    <button [routerLink]="['add']" routerLinkActive="active" class="btn mx-1 my-1 col-md-5">
+    <button (click)="openAddProjectDialog()" routerLinkActive="active" class="btn mx-1 my-1 col-md-5">
       <i class="fa fa-plus-circle"></i> Add Project
     </button>
 </div>

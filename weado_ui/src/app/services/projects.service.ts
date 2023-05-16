@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Project } from '../Classes-Interfaces/project';
 import { environment } from "../../environments/environment";
+import { Report } from '../Classes-Interfaces/report';
+import { Image } from '../Classes-Interfaces/image';
 
 const apiUrl = environment.apiUrl;
 
@@ -16,10 +18,33 @@ export class ProjectsService {
   get projects():Observable<Project[]>{
     return this.http.get<Project[]>(apiUrl+'/weado/projects');
   }
-  getProject(year:number):Observable<Project[]>{
-    return this.http.get<Project[]>(apiUrl+'/weado/projects/'+year);
+  getProjectDetails(id:string):Observable<Project>{
+    return this.http.get<Project>(apiUrl+'/weado/projects/details/'+id);
   }
-  addProject(project:Project): Observable<Project>{
-    return this.http.post<Project>(apiUrl+'/weado/admin/manage/add', project)
+  getProjectSummary(year:number):Observable<Project[]>{
+    return this.http.get<Project[]>(apiUrl+'/weado/projects/summary/'+year);
+  }
+  addProject(project:FormData): Observable<Project>{
+    project.forEach(p=>console.log(p));
+    return this.http.post<Project>(apiUrl+'/weado/admin/manage/add', project);
+  }
+  deleteProject(id:string):Observable<string>{
+    return this.http.delete<string>(apiUrl+'/weado/admin/manage/delete/'+id);
+  }
+
+  // Admin Activities CRUD
+  addProjectActivity(project: Project): Observable<Project>{
+    return this.http.post<Project>(apiUrl+'/weado/admin/manage/activity/add/'+project._id, project);
+  }
+  // Admin Image CRUD
+  addProjectImage(image: FormData): Observable<Image>{
+    return this.http.post<Image>(apiUrl+'/weado/admin/manage/image/add/', image);
+  }
+  // Admin Report CRUD
+  addProjectReport(report:FormData): Observable<Report>{
+    return this.http.post<Report>(apiUrl+'/weado/admin/manage/report/add', report);
+  }
+  deleteProjectReport(id:string):Observable<string>{
+    return this.http.delete<string>(apiUrl+'/weado/admin/manage/report/delete/'+id);
   }
 }

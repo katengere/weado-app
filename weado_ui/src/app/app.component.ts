@@ -22,8 +22,9 @@ export class AppComponent implements OnInit {
   ngOnInit(){
      this.projectsService.projects.subscribe({
        next: projects=> {
-        this.years =projects.map(p=>p.year).filter((year,i,arr)=>arr.indexOf(year)==i);
-        console.log(this.years);
+        this.years =projects.map(p=>{
+          return new Date(p.date).getFullYear();
+        }).filter((year,i,arr)=>arr.indexOf(year)==i);
         this.currentYear = Math.max(...this.years);
       },
       error: error=>this.msgService.message({title:'SERVER ERROR', text:error.message}, 'bg-danger')

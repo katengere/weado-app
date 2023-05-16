@@ -1,0 +1,30 @@
+<h3 mat-dialog-title style="margin-top: 38px;"> Add Report </h3>
+<mat-dialog-content>
+    <form #form="ngForm" enctype="multipart/form-data" role="form">
+        <div class="mb-1">
+            <label for="Author" class="form-label"> Author</label>
+            <input type="text" name="author" #author="ngModel" [(ngModel)]="report.author" required class="form-control" placeholder="author">
+        </div>
+        <div class="mb-1">
+            <label for="title" class="form-label"> Title</label>
+            <input type="text" name="title" #title="ngModel" [(ngModel)]="report.title" required class="form-control" placeholder="title">
+        </div>
+        <div class="mb-1">
+            <label for="summary" class="form-label"> summary</label>
+            <textarea name="summary" #summary="ngModel" [(ngModel)]="report.summary" required class="form-control" placeholder="summary" cols="5" rows="3"></textarea>
+        </div>
+
+        <div class="mb-1">
+            <label for="rFile" class="form-label"> Reports</label>
+            <input type="file" name="rFile" (change)="reportInput($event)" [(ngModel)]="report.rFile" required class="form-control">
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-dialog-close class="btn btn-sm">
+    <i class="fa fa-window-close"></i>Close
+  </button>
+    <button type="submit" mat-dialog-close (click)="onSubmit(form)" class="btn btn-sm">
+      <i class="fa fa-file-upload"></i>Upload!
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,15 @@
+<h5 mat-dialog-title class="card-title">
+    Delete {{dialogData.title}}
+</h5>
+<mat-dialog-content class="card-text">
+    Are you sure to delete this project??
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="card-footer">
+    <button mat-raised-button mat-dialog-close class="btn btn-sm">
+      <i class="fa fa-window-close"></i>Close
+    </button>
+    <button mat-raised-button mat-dialog-close class="btn bg-danger btn-sm" (click)="deleteProject()">
+      <i class="fa fa-trash"></i>Delete
+    </button>
+</mat-dialog-actions>

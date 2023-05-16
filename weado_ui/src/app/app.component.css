@@ -5,6 +5,14 @@ li a,
     color: white !important;
 }
 
+.navbar-nav .nav-item .dropdown-item {
+    color: white !important;
+}
+
+.navbar-nav .nav-item .dropdown-item:hover {
+    color: black !important;
+}
+
 li a:hover,
 .navbar-nav .btn:hover {
     color: black !important;

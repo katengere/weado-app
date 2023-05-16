@@ -4,7 +4,7 @@ import { WeadoHomeComponent } from './components/weado-home/weado-home.component
 import { AboutComponent } from './components/about/about.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
-import { ProjectDetailsComponent } from './components/project-details/project-details.component';
+import { ProjectSummaryComponent } from './components/project-summary/project-summary.component';
 
 const routes: Routes = [
   {path:'', component: WeadoHomeComponent},
@@ -12,8 +12,8 @@ const routes: Routes = [
   {
     path:'projects', component:ProjectsComponent,
     children:[
-      {path:'', component:ProjectDetailsComponent},
-      {path:':year', component:ProjectDetailsComponent}
+      {path:'', component:ProjectSummaryComponent},
+      {path:':year', component:ProjectSummaryComponent}
     ]
   },
   {path:'contacts', component:ContactsComponent},

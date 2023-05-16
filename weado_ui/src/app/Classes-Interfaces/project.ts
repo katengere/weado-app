@@ -1,8 +1,11 @@
 export interface Project {
-  year:number;
+  author: string[];
   title: string;
-  content: string;
-  reports?: any[];
-  images?: any[];
-  date: Date
+  files:any;
+  summary: string;
+  reportsId: any;
+  images: any;
+  date: Date;
+  activities: string[];
+  _id?:string
 }

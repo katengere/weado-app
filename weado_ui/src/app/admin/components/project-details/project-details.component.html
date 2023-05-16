@@ -1,0 +1,94 @@
+<div class="card g-0">
+    <h3 class="card-header text-center">{{project.title}}</h3>
+    <div class="card-body row m-0 p-0">
+        <h4 class="card-header">Authors</h4>
+        <blockquote *ngFor="let auth of project.author; let i=index">
+            <b>Author {{i+1}}:</b> {{auth}}
+        </blockquote>
+    </div>
+    <div class="card-body row m-0 p-0">
+        <h5 class="card-header">Project Summary</h5>
+        <p class="card-text m-0 p-0"> {{project.summary}} </p>
+    </div>
+    <div class="card-body row m-0 p-0">
+        <h5 class="card-header d-flex justify-content-between col-12">
+            <span>Project Reports</span>
+            <span>
+            <button class="btn btn-sm" (click)="addReportDialog()">
+              <i class="fa fa-file-upload"></i>
+            </button>
+          </span>
+        </h5>
+        <div class="card-text container-fluid row m-0 p-0">
+            <div class="card col-md-6 g-0 m-0 p-0" *ngFor="let report of project.reportsId">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <div class="card-title d-flex justify-content-between">
+                        <h5>Title: {{report.title}}</h5>
+                        <span>
+                            <a class="btn edit btn-sm card-link" (click)="editReportDialog(report._id)">
+                              <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="btn delete btn-sm card-link" (click)="deleteReportDialog(report._id)" style="margin-left: 2px;">
+                              <i class="fa fa-trash"></i>
+                            </a>
+                        </span>
+                    </div>
+                    <div class="card-text row">
+
+                        <div class="col-3 g-0 m-0 p-0">
+                            <img src="../../../../assets/imgs/1.jpg" height="71px" width="100%" alt="" srcset="">
+                            <a href="{{report.fileUrl}}">{{report.rFile.filename}}</a>
+                        </div>
+                        <div class="col-9 g-0 m-0 p-0">
+                            <blockquote><b>Author:</b> {{report.author}}</blockquote>
+                            <blockquote><b>Summary:</b> {{report.summary}}</blockquote>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body row m-0 p-0">
+            <h5 class="card-header d-flex justify-content-between">
+                <span>Project Activities</span>
+                <span>
+            <button class="btn btn-sm" (click)="addActivitiesDialog()">
+              <i class="fa fa-fill"></i>
+          </button>
+          </span>
+            </h5>
+            <ul class="list-group list-group-flush card-text" *ngFor="let activity of project.activities; let i=index">
+                <li class="list-group-item">
+                    {{i}}. {{activity}}
+                    <span class="float-end">
+                        <a class="btn edit btn-sm card-link">
+                          <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="btn delete btn-sm card-link" style="margin-left: 2px;">
+                          <i class="fa fa-trash"></i>
+                        </a>
+                    </span>
+                </li>
+                <hr *ngIf="!(i+1==project.activities.length)">
+            </ul>
+        </div>
+        <div class="card-body m-0 p-0 container-fluid">
+            <h5 class="card-header d-flex justify-content-between">
+                <span>Project Images</span>
+                <span>
+              <button class="btn btn-sm" (click)="addImagesDialog()">
+                <i class="fa fa-file-image"></i>
+              </button>
+            </span>
+            </h5>
+            <div class="row">
+                <div class="col-12 col-md-4" *ngFor="let image of project.images;">
+                    <img src="{{image.fileUrl}}" width="160px" height="225px" class="card-img-top " alt="{{image.description}} ">
+                    <br>
+                    <span>Title: {{image.title}}</span> <br>
+                    <span>Description: {{image.description}}</span>
+                </div>
+            </div>
+        </div>
+    </div>

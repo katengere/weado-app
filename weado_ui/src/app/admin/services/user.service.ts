@@ -17,4 +17,7 @@ export class UserService {
   login(user: User):Observable<User>{
     return this.http.post<User>(apiUrl+'/weado/admin/login', user);
   }
+  register(user: FormData):Observable<User>{
+    return this.http.post<User>(apiUrl+'/weado/admin/register', user);
+  }
 }

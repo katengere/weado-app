@@ -1,1 +1,39 @@
-<p>register works!</p>
+<div class="grid-container">
+    <mat-grid-list cols="3" rowHeight="550px" class="grid-list">
+        <mat-grid-tile [colspan]="3" [rowspan]="1">
+            <mat-card class="dashboard-card">
+                <mat-card-header>
+                    <mat-card-title>
+
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                    <form action="" (submit)="onRegister()">
+                        <p>
+                            Umeshajisajili? Tafadhali
+                            <a routerLink="/admin/login">ingia</a>
+                        </p>
+                        <div>
+                            <mat-form-field appearance="fill" color="warn">
+                                <mat-label>jina</mat-label>
+                                <input matInput name="name" [(ngModel)]="weadoAdmin.name">
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-form-field appearance="fill" color="warn">
+                                <mat-label>nenosiri</mat-label>
+                                <input matInput name="password" [(ngModel)]="weadoAdmin.password">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <input type="file" name="userImage" style="display: none;" #imageUpload (change)="onUserImgSelect($event)">
+                            <input type="button" value="picha" (click)="imageUpload.click()"> <span> {{weadoAdmin.user_Img}} </span>
+                        </div>
+                        <button mat-raised-button>sajili!</button>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

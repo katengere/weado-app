@@ -1,7 +1,7 @@
 <div class="row g-0">
     <div class="col-12">
         <ul class="nav nav-tabs nav-fill">
-            <li class="nav-item" *ngFor="let year of years | slice: 1">
+            <li class="nav-item" *ngFor="let year of years ">
                 <a class="nav-link" [routerLink]="[year]" routerLinkActive="active" aria-current="page">
                   {{year}}
                 </a>

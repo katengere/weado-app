@@ -1,0 +1,7 @@
+.edit:hover {
+    color: yellow;
+}
+
+.delete:hover {
+    color: red;
+}

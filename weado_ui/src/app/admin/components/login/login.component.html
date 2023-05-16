@@ -2,6 +2,15 @@
     <div class="col-md-4"></div>
 
     <form class="col-md-4" #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div>
+            <h3 mat-dialog-title class="d-flex justify-content-center">
+                <img src="/assets/login.PNG" class="brand_logo" alt="Logo" height="75px" width="75px">
+            </h3>
+            <!-- <h4>
+                bado haujasajili? Tafadhali
+                <a routerLink="/admin/register">sajili</a>
+            </h4> -->
+        </div>
         <div class="mb-1">
             <label for="Name" class="form-label"><i class="fa fa-user"></i> Name</label>
             <input type="text" name="Name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required placeholder="Name">
