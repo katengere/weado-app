@@ -4,7 +4,13 @@ const fs = require('fs');
 
 const imageStorage = multer.diskStorage({
     // Destination to store image     
-    destination: path.join(__dirname + '../../../public/uploads/users'),
+    destination: (req, file, cb) => {
+        if (process.env.production) {
+            cb(null, '');
+        } else {
+            cb(null, path.join(__dirname + '../../../public/uploads/users'));
+        }
+    },
     filename: (req, file, cb) => {
         cb(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname));
         // file.fieldname is name of the field (image)
