@@ -26,6 +26,8 @@ export class ProjectListComponent implements OnInit{
   ngOnInit() {
     this.projectService.projects.subscribe({
       next:(projs)=>{
+        console.log(projs);
+
         this.projects2 = projs;
         this.projects = projs.reduce((acc:any[], project, i, arr)=>{
           let year = new Date(project.date).getFullYear();
@@ -53,7 +55,10 @@ export class ProjectListComponent implements OnInit{
   delProject(id:string | undefined){
     if (id != undefined) {
       const project = this.projects2.find(p=>p._id === id);
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {data:project});
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data:Object.assign({}, project, {action:'delete', context:'Project'})
+    });
     dialogRef.afterClosed().subscribe({
       next:(res)=>{
         console.log(res);

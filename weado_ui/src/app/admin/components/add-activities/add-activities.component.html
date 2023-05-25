@@ -4,7 +4,7 @@
         <div formArrayName="activities">
             <div *ngFor="let activity of activities.controls; let i = index" [formGroupName]="i">
                 <div class="mb-1">
-                    <label for="activities" class="form-label"> Author {{i+1}}</label>
+                    <label for="activities" class="form-label"> Activity {{i+1}}</label>
                     <input type="text" formControlName="activities" class="form-control" placeholder="activity">
                     <button class="btn btn-sm form-control" *ngIf="!(i == 0)" (click)="removeActivity(i)">
                       <i class="fa fa-user-minus"></i>Remove Activity {{i+1}}
@@ -18,7 +18,7 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-dialog-close class="btn btn-sm" style="margin-right: 1px;">
+    <button mat-dialog-close class="btn btn-sm" style="margin-right: 2px;">
       <i class="fa fa-window-close"></i>Close
     </button>
     <button mat-dialog-close (click)="onSubmit()" class="btn btn-sm">

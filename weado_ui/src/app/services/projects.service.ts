@@ -36,13 +36,19 @@ export class ProjectsService {
   addProjectActivity(project: Project): Observable<Project>{
     return this.http.post<Project>(apiUrl+'/weado/admin/manage/activity/add/'+project._id, project);
   }
+  deleteProjectActivity(id:string, activity: string):Observable<null>{
+    return this.http.delete<null>(apiUrl+'/weado/admin/manage/activity/delete/'+id+'/'+activity );
+  }
   // Admin Image CRUD
   addProjectImage(image: FormData): Observable<Image>{
     return this.http.post<Image>(apiUrl+'/weado/admin/manage/image/add/', image);
   }
+  deleteProjectImage(id:string):Observable<Image>{
+    return this.http.delete<Image>(apiUrl+'/weado/admin/manage/image/delete/'+id);
+  }
   // Admin Report CRUD
-  addProjectReport(report:FormData): Observable<Report>{
-    return this.http.post<Report>(apiUrl+'/weado/admin/manage/report/add', report);
+  addProjectReport(report:FormData): Observable<Project>{
+    return this.http.post<Project>(apiUrl+'/weado/admin/manage/report/add', report);
   }
   deleteProjectReport(id:string):Observable<string>{
     return this.http.delete<string>(apiUrl+'/weado/admin/manage/report/delete/'+id);

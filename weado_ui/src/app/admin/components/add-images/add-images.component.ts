@@ -40,11 +40,11 @@ export class AddImagesComponent implements OnInit {
     this.projectService.addProjectImage(formData).subscribe({
       next: (res)=>{
         console.log(res);
-        this.router.navigateByUrl('/admin/manage/details/'+this.data._id, { skipLocationChange: true });
-        return this.msgService.message({
+        this.msgService.message({
           title: 'IMAGE UPLOAD SUCCESS',
-          text: `Image Added Successfully to Project: ${this.data.title}`
+          text: `Image Added Successfully to Project: ${res.title}`
         }, 'bg-success', 'text-warning');
+        return this.router.navigate(['admin', 'manage','details',this.data._id]);
       },
       error: (err)=>{
         console.log(err);

@@ -25,8 +25,11 @@
         </div>
 
         <div class="mb-1">
-            <label for="files" class="form-label"> Files</label>
-            <input type="file" formControlName="files" (change)="imageInput($event)" class="form-control">
+            <input type="button" value="Project" (click)="projectUpload.click()">
+            <span>
+              {{projectForm.get('fileDoc')?.value.name}}
+            </span>
+            <input type="file" formControlName="fileDoc" style="display: none;" #projectUpload (change)="projectFileInput($event)" class="form-control">
         </div>
         <div class="mb-1">
             <label for="date" class="form-label"> Date</label>

@@ -1,7 +1,7 @@
 export interface Project {
   author: string[];
   title: string;
-  files:any;
+  fileDoc:any;
   summary: string;
   reportsId: any;
   images: any;

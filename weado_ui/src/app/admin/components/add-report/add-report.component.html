@@ -15,8 +15,8 @@
         </div>
 
         <div class="mb-1">
-            <label for="rFile" class="form-label"> Reports</label>
-            <input type="file" name="rFile" (change)="reportInput($event)" [(ngModel)]="report.rFile" required class="form-control">
+            <input type="button" value="Report" (click)="reportUpload.click()"> <span> {{report.rFile?.name}} </span>
+            <input type="file" name="rFile" style="display: none;" #reportUpload (change)="reportInput($event)" required class="form-control">
         </div>
     </form>
 </mat-dialog-content>

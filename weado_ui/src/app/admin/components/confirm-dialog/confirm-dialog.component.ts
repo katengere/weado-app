@@ -18,14 +18,65 @@ export class ConfirmDialogComponent {
 
   deleteProject(){
     this.projectService.deleteProject(this.dialogData._id).subscribe({
-      next: res=>this.msgService.message({title:'Delete Response', text:res}, 'bg-success'),
-      error: err=>this.msgService.message({title:'ERROR', text:err.error})
+      next: res=>{
+        console.log(res);
+        return this.msgService.message({
+          title:'Delete Response', text: 'Successfully deleted project ' + this.dialogData.title
+        }, 'bg-success')
+      },
+      error: err=>{
+        console.log(err);
+
+        this.msgService.message({title:'ERROR', text:err.error});
+      }
     });
   }
   deleteProjectReport(){
     this.projectService.deleteProjectReport(this.dialogData._id).subscribe({
-      next: res=>this.msgService.message({title:'Delete Response', text:res}, 'bg-success'),
-      error: err=>this.msgService.message({title:'ERROR', text:err.error})
+      next: res=>{
+        console.log(res);
+        this.msgService.message({
+          title:'Delete Response', text: 'Successfully deleted report ' + this.dialogData.title
+        }, 'bg-success');
+      },
+      error: err=>{
+        console.log(err);
+
+        this.msgService.message({title:'ERROR', text:err.error})
+      }
+    });
+  }
+  deleteProjectActivity(){
+    this.projectService.deleteProjectActivity(this.dialogData._id, this.dialogData.activity).subscribe({
+      next: res=>{
+        console.log(res);
+        this.msgService.message({
+          title:'Delete Response',
+          text: 'Successfully deleted image ' + this.dialogData.activity.slice(0, 10) + ' .....'
+        }, 'bg-success')
+      },
+      error: err=>{
+        console.log(err);
+
+        this.msgService.message({title:'ERROR', text:err.error})
+      }
+    });
+  }
+
+  deleteProjectImage(){
+    this.projectService.deleteProjectImage(this.dialogData._id).subscribe({
+      next: res=>{
+        console.log(res);
+        this.msgService.message({
+          title:'Delete Response',
+          text: 'Successfully deleted image ' + this.dialogData.title
+        }, 'bg-success')
+      },
+      error: err=>{
+        console.log(err);
+
+        this.msgService.message({title:'ERROR', text:err.error})
+      }
     });
   }
   getProjects(){

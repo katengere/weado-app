@@ -7,9 +7,15 @@ const Project = mongoose.model('Project');
 const fileUrl = `http://localhost:3000/public/uploads/reports/`;
 
 const storage = multer.diskStorage({
-    destination: path.join(__dirname + '../../../public/uploads/reports'),
+    destination: (req, file, cb) => {
+        if (process.env.production) {
+            cb(null, '');
+        } else {
+            cb(null, path.join(__dirname + '../../../public/uploads/reports'));
+        }
+    },
     filename: (req, file, cb) => {
-        cb(null, file.originalname + '_' + Date.now() + path.extname(file.originalname));
+        cb(null, file.originalname);
     }
 });
 const upload = multer({
@@ -42,16 +48,14 @@ function ctrlAddReport(req, res) {
                 projectId: req.body.projectId,
                 fileUrl: req.file.fileUrl
             };
-            Report.create(report).
-            then(response => {
+            Report.create(report).then(response => {
                 Project.findById(report.projectId).select('reportsId').then(project => {
                     project.reportsId.push(response._id);
                     project.save().
                     then(proj => res.status(201).json(proj)).
                     catch(err => res.status(400).json(err));
                 });
-            }).
-            catch(err => {
+            }).catch(err => {
                 console.log(err);
                 const filePath = `${__dirname}/../../public/uploads/reports/${req.file.filename}`;
                 console.log(filePath);
@@ -68,7 +72,30 @@ function ctrlAddReport(req, res) {
 }
 
 const ctrlDeleteReport = (req, res) => {
-    console.log('deleted report ' + req.params._id);
+    const _id = req.params._id;
+    Report.findByIdAndDelete(_id).then(report => {
+        Project.findById(report.projectId).then(project => {
+            project.reportsId = project.reportsId.filter(id => id.toString() !== report._id.toString());
+            project.save().then(proj => {
+                console.log('Saved project ', proj.title);
+                fs.unlink(report.rFile.path, (err) => {
+                    if (err) {
+                        console.log('Error deleting file ', err);
+                        throw err;
+                    }
+                    console.log(report.rFile.filename + ' was deleted');
+                });
+                res.status(204).json(report);
+            }).catch(err => {
+                console.log('ERR Saving Proj', err);
+            });
+        }).catch(err => {
+            console.log('Error finding Project ', err);
+        });
+    }).catch(err => {
+        console.log(err);
+        return res.status(400).json(err);
+    });
 };
 
 module.exports = {

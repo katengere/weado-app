@@ -17,10 +17,10 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-dialog-close class="btn btn-sm">
+    <button mat-dialog-close class="btn btn-sm" style="margin-right: 2px;">
     <i class="fa fa-window-close"></i>Close
   </button>
-    <button type="submit" (click)="onSubmit(form)" class="btn btn-sm">
+    <button type="submit" mat-dialog-close (click)="onSubmit(form)" class="btn btn-sm">
       <i class="fa fa-file-upload"></i>Upload!
   </button>
 </mat-dialog-actions>

@@ -3,8 +3,8 @@ const router = express.Router();
 const ctrlAdmin = require('../controllers/admin');
 const ctrlProjects = require('../controllers/ctrlProjects');
 const { ctrlAddReport, ctrlDeleteReport } = require('../controllers/ctrlReports');
-const { ctrlAddActivities } = require('../controllers/ctrlActivities');
-const { ctrlAddImage } = require('../controllers/ctrlImages');
+const { ctrlAddActivities, ctrlDeleteActivity, ctrlUpdateActivity } = require('../controllers/ctrlActivities');
+const { ctrlAddImage, ctrlDeleteImage } = require('../controllers/ctrlImages');
 
 /* Projects. */
 router.get('/projects', ctrlProjects.ctrlProjects);
@@ -21,13 +21,15 @@ router.delete('/admin/manage/delete/:_id', ctrlProjects.ctrlDeleteProject);
 
 // Admin Report CRUD
 router.post('/admin/manage/report/add', ctrlAddReport);
-router.delete('/admin/manage/report/delete', ctrlDeleteReport);
+router.delete('/admin/manage/report/delete/:_id', ctrlDeleteReport);
 
 // Admin Image CRUD
 router.post('/admin/manage/image/add', ctrlAddImage);
+router.delete('/admin/manage/image/delete/:_id', ctrlDeleteImage);
 
 // Admin Activities CRUD
 router.post('/admin/manage/activity/add/:_id', ctrlAddActivities);
+router.delete('/admin/manage/activity/delete/:_id/:activity', ctrlDeleteActivity);
 
 
 

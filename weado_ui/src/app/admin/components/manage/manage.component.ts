@@ -12,7 +12,7 @@ export class ManageComponent {
   project: Project = {
     title: '', summary: '', reportsId: '', images: '', date: new Date(),
     author: [],
-    files: '',
+    fileDoc: '',
     activities: []
   }
 

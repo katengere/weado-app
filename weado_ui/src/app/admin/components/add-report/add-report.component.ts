@@ -48,10 +48,10 @@ export class AddReportComponent implements OnInit{
     this.projectService.addProjectReport(formData).subscribe({
       next: (res)=>{
         console.log(res);
-        this.router.navigateByUrl('/admin/manage/details/'+this.report.projectId);
+        this.router.navigateByUrl('/admin/manage/details/'+res._id);
         return this.msgService.message({
           title: 'REPORT SUBMIT SUCCESS',
-          text: `Report added Successfully: ${res}`
+          text: `Successfully added Report: ${this.data.title}`
         }, 'bg-success', 'text-warning');
       },
       error: (err)=>{

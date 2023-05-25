@@ -25,7 +25,7 @@ export class AddProjectComponent implements OnInit{
         author: this.fb.array([this.fb.group({author:[dialogData.author[0], Validators.required]})]),
         title: ['', Validators.required],
         summary: ['', Validators.required],
-        files: ['', Validators.required],
+        fileDoc: ['', Validators.required],
         date: ['', Validators.required]
       });
     }
@@ -34,8 +34,8 @@ export class AddProjectComponent implements OnInit{
     console.log(this.projectForm);
   }
 
-  imageInput(event:any){
-      this.projectForm.get('files')?.setValue(event.target.files[0]);
+  projectFileInput(event:any){
+      this.projectForm.get('fileDoc')?.patchValue(event.target.files[0]);
     }
 
   get author(): FormArray{
@@ -55,11 +55,13 @@ export class AddProjectComponent implements OnInit{
         text: 'Please make sure to fill all required fields!'
       }, 'bg-success', 'text-warning');
     }
+    console.log(this.projectForm.get('author')?.value.reduce((acc: any, cv: any)=>[...acc, cv.author],[]));
+
     const formData = new FormData();
-    formData.append('author', this.projectForm.get('author')?.value)
+    formData.append('author', this.projectForm.get('author')?.value.reduce((acc: any, cv: any)=>[...acc, cv.author],[]))
     formData.append('title', this.projectForm.get('title')?.value)
     formData.append('summary', this.projectForm.get('summary')?.value)
-    formData.append('files', this.projectForm.get('files')?.value)
+    formData.append('fileDoc', this.projectForm.get('fileDoc')?.value)
     formData.append('date', this.projectForm.get('date'.toString())?.value)
 
     this.projectService.addProject(formData ).subscribe({

@@ -8,26 +8,27 @@ const ReportSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Project'
     },
-    fileUrl: { type: String, required: true },
+    fileUrl: { type: String, required: false },
     createdOn: { type: Date, default: new Date() },
     modifiedOn: { type: Date, default: new Date() }
 });
 const imageSchema = new mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
-    file: { type: mongoose.Schema.Types.Mixed, required: true },
+    imgDetails: { type: mongoose.Schema.Types.Mixed, required: true },
+    imgUrl: { type: String, required: false },
+    public_id: { type: String, required: false },
     projectId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Project'
     },
-    fileUrl: { type: String, required: true },
     createdOn: { type: Date, default: new Date() },
     modifiedOn: { type: Date, default: new Date() }
 });
 const ProjectSchema = new mongoose.Schema({
     author: { type: [String], required: true },
     title: { type: String, required: true },
-    files: [{ type: mongoose.Schema.Types.Mixed, required: true }],
+    fileDoc: { type: mongoose.Schema.Types.Mixed, required: true },
     summary: String,
     reportsId: [{
         type: mongoose.Schema.Types.ObjectId,

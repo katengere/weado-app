@@ -14,7 +14,7 @@ export class MessageService {
   message(msg:Message, ...bg:string[]){
     this.snackbar.openFromComponent(MessageComponent,{
       data:msg,
-      duration: 3000,
+      duration: 6000,
       panelClass: [...bg],
 
     })

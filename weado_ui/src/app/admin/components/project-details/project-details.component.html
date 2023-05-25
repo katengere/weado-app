@@ -65,7 +65,7 @@
                         <a class="btn edit btn-sm card-link">
                           <i class="fa fa-edit"></i>
                         </a>
-                        <a class="btn delete btn-sm card-link" style="margin-left: 2px;">
+                        <a class="btn delete btn-sm card-link" (click)="deleteActivityDialog(project!._id, activity)" style="margin-left: 2px;">
                           <i class="fa fa-trash"></i>
                         </a>
                     </span>
@@ -84,9 +84,14 @@
             </h5>
             <div class="row">
                 <div class="col-12 col-md-4" *ngFor="let image of project.images;">
-                    <img src="{{image.fileUrl}}" width="160px" height="225px" class="card-img-top " alt="{{image.description}} ">
+                    <img [src]="image.imgUrl" width="160px" height="225px" class="card-img-top " alt="{{image.description}} ">
                     <br>
-                    <span>Title: {{image.title}}</span> <br>
+                    <span>
+                      Title: {{image.title}}
+                      <a class="btn delete btn-sm card-link float-end">
+                        <i class="fa fa-trash" (click)="deleteImageDialog(image._id)"></i>
+                      </a>
+                    </span> <br>
                     <span>Description: {{image.description}}</span>
                 </div>
             </div>

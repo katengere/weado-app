@@ -1,5 +1,5 @@
 export interface Image{
-  _id?: string,
+ _id?: string,
  title: string,
  description: string,
  file:any,
