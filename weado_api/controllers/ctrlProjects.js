@@ -16,7 +16,9 @@ const storage = multer.diskStorage({
     // Destination to store image     
     destination: (req, file, cb) => {
         if (process.env.production) {
-            cb(null, path.join(__dirname + '/temp'));
+            console.log('Multer dest func ', path.join(__dirname + '../../../../temp'));
+            console.log('Multer dest func log 2', path.join(__dirname + '../../../temp'));
+            cb(null, path.join(__dirname + '../../temp'));
         } else {
             cb(null, path.join(__dirname + '../../../public/uploads/projects'));
         }
