@@ -15,7 +15,7 @@ console.log('Multer dest func log 2', path.join(__dirname + '/../../../temp/publ
 
 const storage = multer.diskStorage({
     // Destination to store image     
-    destination: path.join(__dirname + '/../../temp/public/uploads/projects'),
+    destination: path.join(__dirname + '/../../../../temp/public/uploads/projects'),
     filename: (req, file, cb) => {
         cb(null, file.originalname);
         // file.fieldname is name of the field (image)
