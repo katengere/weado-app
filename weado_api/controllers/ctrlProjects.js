@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
     // Destination to store image     
     destination: (req, file, cb) => {
         if (process.env.production) {
-            cb(null, '');
+            cb(null, '/temp');
         } else {
             cb(null, path.join(__dirname + '../../../public/uploads/projects'));
         }
@@ -81,7 +81,6 @@ function ctrlAddProject(req, res) {
                 activities: req.body.activities
             };
             console.log(project);
-
 
             Project.create(project).then(response => {
                 console.log(response);
