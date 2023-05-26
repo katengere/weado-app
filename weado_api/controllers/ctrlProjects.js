@@ -9,12 +9,14 @@ const cloudinary = require('cloudinary').v2;
 const { unlinkImageFiles, unlinkReportFiles } = require('./deleteImages&Reports');
 const fileUrl = `http://localhost:3000/uploads/projects/`;
 console.log(process.env.production);
+console.log(__dirname);
+
 
 const storage = multer.diskStorage({
     // Destination to store image     
     destination: (req, file, cb) => {
         if (process.env.production) {
-            cb(null, '/temp');
+            cb(null, path.join(__dirname + '/temp'));
         } else {
             cb(null, path.join(__dirname + '../../../public/uploads/projects'));
         }
