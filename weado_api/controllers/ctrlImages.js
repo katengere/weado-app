@@ -1,4 +1,3 @@
-const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const mongoose = require('mongoose');
@@ -6,48 +5,25 @@ const Image = mongoose.model('Image');
 const Project = mongoose.model('Project');
 const cloudinary = require('cloudinary').v2;
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        if (process.env.production) {
-            cb(null, '');
-        } else {
-            cb(null, path.join(__dirname + '../../../public/uploads/images'));
-        }
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + '_' + file.originalname);
-    }
-});
-const upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 3000000 // 1000000 Bytes = 3 MB
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(png|jpg|jpeg|gif)$/i)) {
-            // upload only png and jpg format
-            return cb('Please upload an image file');
-        }
-        cb(undefined, true);
-    }
-}).single('file');
-
 function ctrlAddImage(req, res) {
-    upload(req, res, (err) => {
+    const file = req.files.file;
+    const filePath = path.join(__dirname + '/../../tmp/' + file.name);
+    file.path = filePath;
+    console.log(file);
+
+    file.mv(filePath, (err) => {
         if (err) {
-            console.log('Error uploading file, ', err);
-            return res.status(400).json(err);
-        }
-        if (req.file) {
-            console.log(req.file);
-            cloudinary.uploader.upload(req.file.path, {
-                public_id: req.file.filename,
+            console.log('Express loader mv method Error ', err);
+            return res.status(400).json('file req obj not added');
+        } else {
+            cloudinary.uploader.upload(filePath, {
+                public_id: file.name,
                 folder: 'weado_Images'
             }).then(result => {
                 console.log(result);
                 const image = {
                     title: req.body.title,
-                    imgDetails: req.file,
+                    imgDetails: file,
                     description: req.body.description,
                     imgUrl: result.url,
                     public_id: result.public_id,
@@ -59,28 +35,27 @@ function ctrlAddImage(req, res) {
                         project.images.push(image._id);
                         project.save().then(proj => res.status(201).json(image)).
                         catch(err => {
-                            fs.unlink(req.file.path, (err) => {
+                            fs.unlink(filePath, (err) => {
                                 if (err) throw err;
-                                console.log(req.file.filename + ' was deleted');
+                                console.log(file.name + ' was deleted');
                             });
                             return res.status(400).json(err);
                         });
                     });
                 }).catch(err => {
                     console.log(err);
-                    console.log(req.file.path);
-                    fs.unlink(req.file.path, (err) => {
+                    fs.unlink(filePath, (err) => {
                         if (err) throw err;
-                        console.log(req.file.filename + ' was deleted');
+                        console.log(file.name + ' was deleted');
                     });
                     return res.status(400).json(err);
                 });
             }).
             catch(err => {
-                console.log(err);
-                fs.unlink(req.file.path, (err) => {
+                console.log('cloudinary errror ', err);
+                fs.unlink(filePath, (err) => {
                     if (err) throw err;
-                    console.log(req.file.filename + ' was deleted');
+                    console.log(file.name + ' was deleted');
                 });
                 if (err.error.code === 'ENOTFOUND') {
                     err.message = 'No internet connection';
@@ -88,8 +63,6 @@ function ctrlAddImage(req, res) {
                 }
                 return res.status(400).json(err);
             });
-        } else {
-            res.status(400).json('file req obj not added');
         }
     });
 }

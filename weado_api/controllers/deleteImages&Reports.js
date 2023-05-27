@@ -16,7 +16,7 @@ function unlinkImageFiles(id) {
                             console.log('Error deleting file ', err);
                             throw err;
                         }
-                        console.log(image.imgDetails.filename + ' was deleted');
+                        console.log(image.imgDetails.name + ' was deleted');
                     });
                 }).catch(err => Promise.reject(err));
                 console.log('delete and unlinked image ', image.title);
@@ -38,7 +38,7 @@ function unlinkReportFiles(id) {
                         console.log('Error deleting file ', err);
                         throw err;
                     }
-                    console.log(report.rFile.filename + ' was deleted');
+                    console.log(report.rFile.name + ' was deleted');
                 });
                 console.log('deleted report ', report.title);
             });

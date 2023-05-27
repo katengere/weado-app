@@ -29,6 +29,7 @@ export class ProjectDetailsComponent implements OnInit{
         next:(param: Params)=>{
           this.projectService.getProjectDetails(param['_id']).subscribe({
             next:res=>{
+              console.log(res)
              this.project=res;
             }
           });

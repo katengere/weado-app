@@ -7,34 +7,7 @@ const Image = mongoose.model('Image');
 const Report = mongoose.model('Report');
 const cloudinary = require('cloudinary').v2;
 const { unlinkImageFiles, unlinkReportFiles } = require('./deleteImages&Reports');
-const fileUrl = `http://localhost:3000/uploads/projects/`;
-console.log(process.env.production);
-console.log('Multer dest func ', path.join(__dirname + '/../../../../temp/public/uploads/projects'));
-console.log('Multer dest func log 2', path.join(__dirname + '/../../../temp/public/uploads/projects'));
-
-
-const storage = multer.diskStorage({
-    // Destination to store image     
-    destination: path.join(__dirname + '/../../../../temp/public/uploads/projects'),
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-        // file.fieldname is name of the field (image)
-        // path.extname get the uploaded file extension
-    }
-});
-const upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 3000000 // 1000000 Bytes = 3 MB
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(doc|docx|pdf|excel)$/i)) {
-            // upload only png and jpg format
-            return cb('Please upload a document(pdf or doc)');
-        }
-        cb(undefined, true);
-    }
-}).single('fileDoc');
+const fileUrl = `http://localhost:3000/`;
 
 function ctrlProjects(req, res, next) {
     Project.find({}, {}, { sort: { date: 1 } }).
@@ -59,38 +32,55 @@ function ctrlProjectDetails(req, res, next) {
 }
 
 function ctrlAddProject(req, res) {
-    upload(req, res, (err) => {
+    const file = req.files.fileDoc;
+    const filePath = path.join(__dirname + '/../../tmp/' + file.name);
+    file.path = filePath;
+    console.log(file);
+    file.mv(filePath, (err) => {
         if (err) {
-            console.log('Error uploading file, ', err);
-            return res.status(400).json(err);
-        }
-        if (req.file) {
-            req.file.fileUrl = `${fileUrl}${req.file.filename}`;
-            console.log('Authors ', req.body.author);
+            console.log('Express loader mv method Error ', err);
+            return res.status(400).json('file req obj not added');
+        } else {
+            cloudinary.uploader.upload(filePath, {
+                public_id: file.name,
+                resource_type: 'auto',
+                folder: 'weado_Projects'
+            }).then(result => {
+                console.log(result);
 
-            const project = {
-                author: req.body.author.split(','),
-                title: req.body.title,
-                fileDoc: req.file,
-                summary: req.body.summary,
-                date: req.body.date,
-                activities: req.body.activities
-            };
-            console.log(project);
-
-            Project.create(project).then(response => {
-                console.log(response);
-                return res.status(201).json(response);
-            }).catch(err => {
-                console.log(err);
-                fs.unlink(req.file.path, (err) => {
-                    if (err) throw err;
-                    console.log(req.file.filename + ' was deleted');
+                file.fileUrl = result.url;
+                const project = {
+                    author: req.body.author.split(','),
+                    title: req.body.title,
+                    fileDoc: file,
+                    summary: req.body.summary,
+                    date: req.body.date,
+                    activities: req.body.activities
+                };
+                console.log(project);
+                Project.create(project).then(response => {
+                    console.log(response);
+                    return res.status(201).json(response);
+                }).catch(err => {
+                    console.log(err);
+                    fs.unlink(filePath, (err) => {
+                        if (err) throw err;
+                        console.log(file.name + ' was deleted');
+                    });
+                    return res.status(400).json(err);
                 });
+            }).catch(err => {
+                console.log('cloudinary errror ', err);
+                fs.unlink(filePath, (err) => {
+                    if (err) throw err;
+                    console.log(file.name + ' was deleted');
+                });
+                if (err.error.code === 'ENOTFOUND') {
+                    err.message = 'No internet connection';
+                    return res.status(404).json(err);
+                }
                 return res.status(400).json(err);
             });
-        } else {
-            res.status(400).json('file req obj not added');
         }
     });
 }

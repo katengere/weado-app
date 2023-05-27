@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 require('./weado_api/models/db');
 
 const indexRouter = require('./weado_api/routes/index');
@@ -20,7 +21,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, './public')));
+
+app.use(fileUpload({
+    useTempFiles: true,
+    limits: { fileSize: 3000000 },
+    debug: true,
+    abortOnLimit: true,
+    preserveExtension: true
+}));
+app.use(express.static(path.join(__dirname, './temp')));
 
 
 app.use(express.static(path.join(__dirname, './weado_ui/build')));

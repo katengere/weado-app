@@ -71,7 +71,9 @@ export class AddProjectComponent implements OnInit{
         this.router.navigateByUrl('/projects/'+new Date(project.date).getFullYear());
       },
       error:(err)=>{
-        this.msgService.message({title: 'SERVER ERROR', text: err.error}, 'bg-primary', 'text-danger');
+        console.log(err);
+
+        this.msgService.message({title: 'SERVER ERROR', text: err.error.message}, 'bg-primary', 'text-danger');
       }
     });
 
