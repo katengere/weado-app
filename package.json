@@ -6,6 +6,7 @@
         "start": "node ./bin/www"
     },
     "dependencies": {
+        "@cyclic.sh/s3fs": "^1.2.8",
         "aws-sdk": "^2.1384.0",
         "cloudinary": "^1.37.0",
         "cookie-parser": "~1.4.4",

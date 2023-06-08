@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(fileUpload({
-    useTempFiles: true,
+    createParentPath: true,
     limits: { fileSize: 3000000 },
     debug: true,
     abortOnLimit: true,

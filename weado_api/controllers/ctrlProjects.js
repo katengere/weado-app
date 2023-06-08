@@ -34,6 +34,7 @@ function ctrlProjectDetails(req, res, next) {
 function ctrlAddProject(req, res) {
     const file = req.files.fileDoc;
     const filePath = path.join(__dirname + '/../../tmp/' + file.name);
+    console.log(filePath);
     file.path = filePath;
     console.log(file);
     file.mv(filePath, (err) => {
