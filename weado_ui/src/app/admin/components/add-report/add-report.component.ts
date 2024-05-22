@@ -47,7 +47,7 @@ export class AddReportComponent implements OnInit {
     formData.append('projectId', this.report.projectId)
 
     this.projectService.addProjectReport(formData).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log(res);
         this.router.navigateByUrl('/admin/manage/details/' + res._id);
         return this.msgService.message({
@@ -55,7 +55,7 @@ export class AddReportComponent implements OnInit {
           text: `Successfully added Report: ${this.data.title}`, bg: 'red'
         });
       },
-      error: (err) => {
+      error: (err: any) => {
         return this.msgService.message({
           title: 'REPORT SUBMIT ERROR',
           text: `Error submiting a report: ${err}`, bg: 'red'

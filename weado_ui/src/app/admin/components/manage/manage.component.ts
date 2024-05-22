@@ -26,11 +26,11 @@ export class ManageComponent {
       data: Object.assign({}, this.project, { dialodTitle: 'Add Project', action: 'Add' })
     });
     dialogRef.afterClosed().subscribe({
-      next(res) {
+      next(res: any) {
         console.log(res);
         dialogRef.close()
       },
-      error(err) {
+      error(err: any) {
         console.log(err);
       }
     });

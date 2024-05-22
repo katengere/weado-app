@@ -20,8 +20,8 @@ export class CustomHttpGeneratorService extends DefaultHttpUrlGenerator {
       this.registerHttpResourceUrls({ [entityName]: resourceUrls });
     } else if (entityName === 'Project') {
       resourceUrls = {
-        collectionResourceUrl: environment.apiUrl + '/projects/',
-        entityResourceUrl: environment.apiUrl + '/projects/'
+        collectionResourceUrl: environment.apiUrl + '/weado/projects/',
+        entityResourceUrl: environment.apiUrl + '/weado/projects/'
       }
       this.registerHttpResourceUrls({ [entityName]: resourceUrls });
     }

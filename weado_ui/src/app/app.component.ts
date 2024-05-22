@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.pEntityService.getAll();
-    this.projectsService.projects.subscribe({
+    this.pEntityService.entities$.subscribe({
       next: projects => {
         this.url = this.route.routerState.toString();
         console.log('url ', this.url);

@@ -31,16 +31,16 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      this.userService.login(this.user).subscribe(
-        user => {
+      this.userService.login(this.user).subscribe({
+        next: (user: User) => {
           this.storageService.saveToken(user.name);
           this.msgService.message({ title: 'SUCCESS', text: 'Wellcome ' + user.name.toUpperCase(), bg: 'green' });
           this.router.navigateByUrl('admin/manage');
         },
-        err => {
+        error: (err: any) => {
           this.msgService.message({ title: 'SERVER ERROR', text: err.error.message, bg: 'red' })
         }
-      )
+      })
       form.resetForm();
     } else {
       this.msgService.message({
