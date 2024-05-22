@@ -11,11 +11,11 @@ const fileUrl = `http://localhost:3000/`;
 
 function ctrlProjects(req, res, next) {
     Project.find({}, {}, { sort: { date: 1 } }).
-    then((result) => res.status(200).json(result)).
-    catch(err => {
-        console.log(err);
-        return res.status(400).json(err);
-    });
+        then((result) => res.status(200).json(result)).
+        catch(err => {
+            console.log(err);
+            return res.status(400).json(err);
+        });
 }
 
 function ctrlProjectSummary(req, res, next) {
@@ -27,8 +27,8 @@ function ctrlProjectSummary(req, res, next) {
 function ctrlProjectDetails(req, res, next) {
     const _id = req.params._id;
     Project.findById(_id).populate(['reportsId', 'images']).
-    then(result => res.status(200).json(result)).
-    catch(err => res.status(404).json(`Project does not exist: ${err}`));
+        then(result => result ? res.status(200).json(result) : res.status(404).json(`Project does not exist: Incorrect project id`)).
+        catch(err => res.status(404).json(`Project does not exist: ${err}`));
 }
 
 function ctrlAddProject(req, res) {
@@ -104,11 +104,11 @@ function ctrlDeleteProject(req, res) {
 
             return res.status(204).json('Successfully removed ' + project.title);
         }).
-        catch(err => {
-            console.log(err);
-            err.message = 'Sorry, project Not Deleted';
-            res.status(404).json(err);
-        });
+            catch(err => {
+                console.log(err);
+                err.message = 'Sorry, project Not Deleted';
+                res.status(404).json(err);
+            });
     }).catch(err => console.log(err));
 
 }

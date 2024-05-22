@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MessageService } from 'src/app/services/message.service';
 
@@ -9,18 +9,18 @@ import { MessageService } from 'src/app/services/message.service';
 })
 export class ContactsComponent implements OnInit {
   contact = {
-    name:'', email: '', message:''
+    name: '', email: '', message: ''
   }
   constructor(
     private msgService: MessageService
-  ){}
-  ngOnInit(): void{}
+  ) { }
+  ngOnInit(): void { }
 
-  onSubmit(form:NgForm){
+  onSubmit(form: NgForm) {
     if (!form.valid) {
       this.msgService.message({
-        title:'FORM ERROR', text:'Please make sure to fill all required fields!'
-      }, 'bg-warning')
+        title: 'FORM ERROR', text: 'Please make sure to fill all required fields!', bg: 'red'
+      })
     }
   }
 

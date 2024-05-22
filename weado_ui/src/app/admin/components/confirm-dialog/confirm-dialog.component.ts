@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MessageService } from 'src/app/services/message.service';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
   selector: 'weado-confirm-dialog',
@@ -13,73 +13,73 @@ export class ConfirmDialogComponent {
   constructor(
     private projectService: ProjectsService,
     private msgService: MessageService,
-    @Inject(MAT_DIALOG_DATA) public dialogData:any
-  ){}
+    @Inject(MAT_DIALOG_DATA) public dialogData: any
+  ) { }
 
-  deleteProject(){
+  deleteProject() {
     this.projectService.deleteProject(this.dialogData._id).subscribe({
-      next: res=>{
+      next: res => {
         console.log(res);
         return this.msgService.message({
-          title:'Delete Response', text: 'Successfully deleted project ' + this.dialogData.title
-        }, 'bg-success')
+          title: 'Delete Response', text: 'Successfully deleted project ' + this.dialogData.title, bg: 'green'
+        })
       },
-      error: err=>{
+      error: err => {
         console.log(err);
 
-        this.msgService.message({title:'ERROR', text:err.error});
+        this.msgService.message({ title: 'ERROR', text: err.error, bg: 'red' });
       }
     });
   }
-  deleteProjectReport(){
+  deleteProjectReport() {
     this.projectService.deleteProjectReport(this.dialogData._id).subscribe({
-      next: res=>{
+      next: res => {
         console.log(res);
         this.msgService.message({
-          title:'Delete Response', text: 'Successfully deleted report ' + this.dialogData.title
-        }, 'bg-success');
+          title: 'Delete Response', text: 'Successfully deleted report ' + this.dialogData.title, bg: 'green'
+        });
       },
-      error: err=>{
+      error: err => {
         console.log(err);
 
-        this.msgService.message({title:'ERROR', text:err.error})
+        this.msgService.message({ title: 'ERROR', text: err.error, bg: 'red' })
       }
     });
   }
-  deleteProjectActivity(){
+  deleteProjectActivity() {
     this.projectService.deleteProjectActivity(this.dialogData._id, this.dialogData.activity).subscribe({
-      next: res=>{
+      next: res => {
         console.log(res);
         this.msgService.message({
-          title:'Delete Response',
-          text: 'Successfully deleted image ' + this.dialogData.activity.slice(0, 10) + ' .....'
-        }, 'bg-success')
+          title: 'Delete Response',
+          text: 'Successfully deleted image ' + this.dialogData.activity.slice(0, 10) + ' .....', bg: 'green'
+        })
       },
-      error: err=>{
+      error: err => {
         console.log(err);
 
-        this.msgService.message({title:'ERROR', text:err.error})
+        this.msgService.message({ title: 'ERROR', text: err.error, bg: 'red' })
       }
     });
   }
 
-  deleteProjectImage(){
+  deleteProjectImage() {
     this.projectService.deleteProjectImage(this.dialogData._id).subscribe({
-      next: res=>{
+      next: res => {
         console.log(res);
         this.msgService.message({
-          title:'Delete Response',
-          text: 'Successfully deleted image ' + this.dialogData.title
-        }, 'bg-success')
+          title: 'Delete Response',
+          text: 'Successfully deleted image ' + this.dialogData.title, bg: 'green'
+        })
       },
-      error: err=>{
+      error: err => {
         console.log(err);
 
-        this.msgService.message({title:'ERROR', text:err.error})
+        this.msgService.message({ title: 'ERROR', text: err.error, bg: 'red' })
       }
     });
   }
-  getProjects(){
+  getProjects() {
 
   }
 }

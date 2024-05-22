@@ -25,7 +25,6 @@ app.use(cookieParser());
 app.use(fileUpload({
     createParentPath: true,
     limits: { fileSize: 3000000 },
-    debug: true,
     abortOnLimit: true,
     preserveExtension: true
 }));
@@ -42,17 +41,17 @@ app.use('/weado', (req, res, next) => {
 });
 
 app.use('/weado', indexRouter);
-app.get('*', function(req, res, next) {
+app.get('*', function (req, res, next) {
     res.sendFile(path.join(__dirname, 'weado_ui', 'build', 'index.html'));
 });
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};

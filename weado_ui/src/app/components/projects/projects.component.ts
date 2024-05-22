@@ -12,16 +12,16 @@ export class ProjectsComponent implements OnInit {
   constructor(
     private projectsService: ProjectsService,
     private msgService: MessageService
-    ){}
+  ) { }
   ngOnInit(): void {
-     this.projectsService.projects.subscribe({
-       next:  projects=> this.years = projects.reduce((acc:number[], project)=>{
-         if (acc.includes(new Date(project.date).getFullYear())) {
-           return acc;
-         }
-         return [...acc, new Date(project.date).getFullYear()];
-       }, []),
-       error: error=> this.msgService.message({title: 'SERVER ERROR',text: error.message}, 'bg-danger')
-     })
+    this.projectsService.projects.subscribe({
+      next: projects => this.years = projects.reduce((acc: number[], project) => {
+        if (acc.includes(new Date(project.date).getFullYear())) {
+          return acc;
+        }
+        return [...acc, new Date(project.date).getFullYear()];
+      }, []),
+      error: error => this.msgService.message({ title: 'SERVER ERROR', text: error.message, bg: 'red' })
+    })
   }
 }

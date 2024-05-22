@@ -1,4 +1,5 @@
-export interface Message{
+export interface Message {
   title: string,
-  text: string
+  text: string,
+  bg: string
 }

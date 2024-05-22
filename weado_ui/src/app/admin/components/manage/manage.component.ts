@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
-import { AddProjectComponent } from '../add-project/add-project.component';
 import { Project } from 'src/app/Classes-Interfaces/project';
+import { AddProjectComponent } from '../add-project/add-project.component';
 
 @Component({
   selector: 'weado-manage',
@@ -13,23 +13,25 @@ export class ManageComponent {
     title: '', summary: '', reportsId: '', images: '', date: new Date(),
     author: [],
     fileDoc: '',
-    activities: []
+    activities: [],
+    _id: ''
   }
 
   constructor(
     private dialog: MatDialog
-  ){}
+  ) { }
 
-  openAddProjectDialog(){
+  openAddProjectDialog() {
     const dialogRef = this.dialog.open(AddProjectComponent, {
-      data: Object.assign({},this.project,{ dialodTitle:'Add Project', action:'Add'})
+      data: Object.assign({}, this.project, { dialodTitle: 'Add Project', action: 'Add' })
     });
     dialogRef.afterClosed().subscribe({
-      next(res){
+      next(res) {
         console.log(res);
         dialogRef.close()
       },
-      error(err){console.log(err);
+      error(err) {
+        console.log(err);
       }
     });
   }
