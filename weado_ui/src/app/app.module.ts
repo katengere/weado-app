@@ -10,17 +10,17 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { EntityDataModule, HttpUrlGenerator } from "@ngrx/data";
 import { EffectsModule } from "@ngrx/effects";
-import { StoreRouterConnectingModule } from "@ngrx/router-store";
+import { routerReducer, StoreRouterConnectingModule } from "@ngrx/router-store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
+import { MessageComponent } from './components/alert/alert.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
-import { MessageComponent } from './components/message/message.component';
 import { ProjectSummaryComponent } from './components/project-summary/project-summary.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { WeadoHomeComponent } from './components/weado-home/weado-home.component';
 import { entityConfig } from "./entity-metadata";
-import { CustomHttpGeneratorService } from "./services/customHTTP/custom-http-generator.service";
+import { CustomHttpGeneratorService } from "./entity-services/customHTTP/custom-http-generator.service";
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { CustomHttpGeneratorService } from "./services/customHTTP/custom-http-ge
     FormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({ 'router': routerReducer }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),

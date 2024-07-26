@@ -1,27 +1,82 @@
-<h3 mat-dialog-title style="margin-top: 38px;"> Add Activities </h3>
+<h3 mat-dialog-title style="margin-top: 38px;" class="text-center"> {{dialogData.action || 'Add'}} Activity </h3>
 <mat-dialog-content>
-    <form [formGroup]="activitiesForm" role="form">
-        <div formArrayName="activities">
-            <div *ngFor="let activity of activities.controls; let i = index" [formGroupName]="i">
-                <div class="mb-1">
-                    <label for="activities" class="form-label"> Activity {{i+1}}</label>
-                    <input type="text" formControlName="activities" class="form-control" placeholder="activity">
-                    <button class="btn btn-sm form-control" *ngIf="!(i == 0)" (click)="removeActivity(i)">
-                      <i class="fa fa-user-minus"></i>Remove Activity {{i+1}}
-                    </button>
-                    <button class="btn btn-sm form-control" (click)="addActivity()">
-                      <i class="fa fa-user-plus"></i>Add Activity {{i+2}}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>
+  <form [formGroup]="activityForm" role="form">
+    <div class="mb-1">
+      <mat-form-field class="w-100">
+        <mat-label>Date</mat-label>
+        <input placeholder="Date" [matDatepicker]="createdOn" matInput formControlName="createdOn" />
+        <mat-datepicker-toggle matIconSuffix [for]="createdOn"></mat-datepicker-toggle>
+        <mat-datepicker #createdOn></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="mb-1">
+      <label for="title" class="form-label"> Title</label>
+      <input type="text" formControlName="title" class="form-control" placeholder="title">
+    </div>
+    <div class="mb-1">
+      <label for="description" class="form-label"> Description</label>
+      <textarea formControlName="description" class="form-control" placeholder="description" cols="5"
+        rows="3"></textarea>
+    </div>
+    <div class="mb-1">
+      <label for="date" class="form-label">Activity Items</label>
+      <div class="table-responsive">
+        <table formArrayName="budget" class="table">
+          <thead>
+            <tr>
+              <th scope="col">sn</th>
+              <th scope="col">Item</th>
+              <th scope="col">Cost</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+              <td>{{i+1}}</td>
+              <td>
+                <input type="text" formControlName="item" class="form-control" placeholder="item">
+              </td>
+              <td>
+                <input type="text" formControlName="cost" (change)="onItemChange(i)" class="form-control"
+                  placeholder="cost">
+              </td>
+              <td>
+                <input type="text" formControlName="quantity" (change)="onItemChange(i)" class="form-control"
+                  placeholder="quantity">
+              </td>
+              <td>
+                <input type="text" formControlName="total" class="form-control" placeholder="total">
+              </td>
+              <td>
+                <a class="btn btn-sm bg-danger" (click)="removeItem(i)">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4">Grand Total</td>
+              <td>
+                {{grandTotal}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="float-end">
+          <button class="btn btn-sm form-control" (click)="addItem()">
+            [+]
+          </button>
+        </p>
+      </div>
+    </div>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-dialog-close class="btn btn-sm" style="margin-right: 2px;">
-      <i class="fa fa-window-close"></i>Close
-    </button>
-    <button mat-dialog-close (click)="onSubmit()" class="btn btn-sm">
-      <i class="fa fa-file-upload"></i> Upload!
-    </button>
+  <button mat-dialog-close class="btn btn-sm" style="margin-right: 2px;">
+    <i class="fa fa-window-close"></i>Close
+  </button>
+  <button (click)="onSubmit()" class="btn btn-sm">
+    <i class="fa fa-file-upload"></i> {{dialogData.action || 'Upload!'}}
+  </button>
 </mat-dialog-actions>

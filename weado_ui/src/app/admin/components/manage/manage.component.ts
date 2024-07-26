@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Project } from 'src/app/Classes-Interfaces/project';
 import { AddProjectComponent } from '../add-project/add-project.component';
 
 @Component({
   selector: 'weado-manage',
+  standalone: true,
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.css']
 })

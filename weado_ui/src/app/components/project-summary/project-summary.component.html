@@ -1,18 +1,29 @@
 <div class="col-12" *ngFor="let project of projects">
     <div class="card">
-        <div class="card-header">
-            {{project.date | date}}
-        </div>
+        <h5 class="card-header">
+            {{project.title}}
+        </h5>
         <div class="card-body">
-            <h5 class="card-header">{{project.title}}</h5>
-            <div class="card-text d-flex justify-content-between">
+            <div class="card-text">
                 <section>
-                    <h5 class="card-title">Project Content</h5>
+                    <h5 class="card-title">Duration</h5>
+                    <p>Start: {{project.date | date}}</p>
+                    <p>End: </p>
+                    <p>Activities {{project.activities.length}}</p>
+                </section>
+                <section>
+                    <h5 class="card-title">Author</h5>
+                    <p *ngFor="let author of project.author">
+                        {{author}}
+                    </p>
+                </section>
+                <section>
+                    <h5 class="card-title">Summary</h5>
                     {{project.summary}}
                 </section>
-                <section *ngFor="let report of project.reportsId">
-                    <h5 class="card-title">Project Reports</h5>
-                    <p>{{report.originalname}}</p>
+                <h5 class="card-title">Project Reports</h5>
+                <section *ngFor="let report of reports | sortReport: project; let i=index;">
+                    <p>{{i+1}}. {{report.title}}</p>
                 </section>
             </div>
         </div>

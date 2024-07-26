@@ -1,14 +1,14 @@
 <div class="row g-0">
-    <div class="col-12">
-        <ul class="nav nav-tabs nav-fill">
+    <div class="col-md-2">
+        <ul class="nav flex-column">
             <li class="nav-item" *ngFor="let year of years ">
                 <a class="nav-link" [routerLink]="[year]" routerLinkActive="active" aria-current="page">
-                  {{year}}
+                    {{year}}
                 </a>
             </li>
         </ul>
     </div>
-    <div class="col-12">
+    <div class="col-md-10">
         <router-outlet></router-outlet>
     </div>
 </div>

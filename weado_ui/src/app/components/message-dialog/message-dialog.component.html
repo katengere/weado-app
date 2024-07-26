@@ -1,0 +1,28 @@
+<h3 mat-dialog-title style="margin-top: 38px;" class="text-center"> Add Message </h3>
+<mat-dialog-content>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="mb-2">
+      <label for="Name" class="form-label"><i class="fa fa-user"></i> Name</label>
+      <input type="text" name="Name" #name="ngModel" [(ngModel)]="message.name" class="form-control" required
+        placeholder="Name">
+    </div>
+    <div class="mb-2">
+      <label for="email" class="form-label"><i class="fa fa-mail-bulk"></i> Email</label>
+      <input type="email" autocomplete="" name="email" #email="ngModel" [(ngModel)]="message.email" required
+        class="form-control" placeholder="Email">
+    </div>
+    <div class="mb-1">
+      <label for="message" class="form-label"><i class="fa fa-envelope"></i> Message</label>
+      <textarea name="message" #email="ngModel" [(ngModel)]="message.text" required class="form-control"
+        placeholder="Message" id="" cols="5" rows="3"></textarea>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-dialog-close class="btn btn-sm" style="margin-right: 2px;">
+    <i class="fa fa-window-close"></i>Close
+  </button>
+  <button type="submit" (click)="onSubmit(form)" class="btn btn-sm float-end text-white">
+    <i class="fa fa-comment"></i> Send!
+  </button>
+</mat-dialog-actions>

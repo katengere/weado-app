@@ -4,11 +4,18 @@ body,
 .offcanvas,
 .dropdown-menu,
 .navbar-toggler,
-.card {
+.card, mat-dialog-content, mat-dialog-actions {
     background-color: #296F56;
     color: white;
 }
-
+.accordion, 
+.accordion-item, 
+.accordion-header, 
+.accordion-button, 
+.accordion-body {
+    background-color: #296F56;
+    color: white;
+}
 a .active {
     color: black;
 }

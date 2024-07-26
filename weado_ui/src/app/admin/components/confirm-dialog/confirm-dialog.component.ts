@@ -1,23 +1,34 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MessageService } from 'src/app/services/message.service';
-import { ProjectsService } from 'src/app/services/projects.service';
+import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
+import { ActivityEntityService } from '../../../entity-services/activityEntity /activity-entity.service';
+import { AlertService } from '../../../entity-services/alert.service';
+import { ImageEntityService } from '../../../entity-services/imageEntity/image-entity.service';
+import { ProjectEntityService } from '../../../entity-services/projectEntity/project-entity.service';
+import { ReportEntityService } from '../../../entity-services/reportEntity/report-entity.service';
 
 @Component({
   selector: 'weado-confirm-dialog',
+  standalone: true,
+  imports: [CommonModule, MatDialogModule],
   templateUrl: './confirm-dialog.component.html',
   styleUrls: ['./confirm-dialog.component.css']
 })
 export class ConfirmDialogComponent {
 
   constructor(
-    private projectService: ProjectsService,
-    private msgService: MessageService,
+    private pEntityService: ProjectEntityService,
+    private iEntityService: ImageEntityService,
+    private rEntityService: ReportEntityService,
+    private aEntityService: ActivityEntityService,
+    private msgService: AlertService,
     @Inject(MAT_DIALOG_DATA) public dialogData: any
-  ) { }
+  ) {
+    console.log('Dialog Data ', dialogData);
+  }
 
   deleteProject() {
-    this.projectService.deleteProject(this.dialogData._id).subscribe({
+    this.pEntityService.delete(this.dialogData._id).subscribe({
       next: res => {
         console.log(res);
         return this.msgService.message({
@@ -32,27 +43,27 @@ export class ConfirmDialogComponent {
     });
   }
   deleteProjectReport() {
-    this.projectService.deleteProjectReport(this.dialogData._id).subscribe({
+    this.rEntityService.delete(this.dialogData._id).subscribe({
       next: res => {
         console.log(res);
+        this.pEntityService.getAll();
         this.msgService.message({
-          title: 'Delete Response', text: 'Successfully deleted report ' + this.dialogData.title, bg: 'green'
+          title: 'Report Delete Response', text: 'Successfully deleted report ' + this.dialogData.title, bg: 'green'
         });
       },
       error: err => {
         console.log(err);
-
         this.msgService.message({ title: 'ERROR', text: err.error, bg: 'red' })
       }
     });
   }
   deleteProjectActivity() {
-    this.projectService.deleteProjectActivity(this.dialogData._id, this.dialogData.activity).subscribe({
+    this.aEntityService.delete(this.dialogData.activity).subscribe({
       next: res => {
         console.log(res);
         this.msgService.message({
-          title: 'Delete Response',
-          text: 'Successfully deleted image ' + this.dialogData.activity.slice(0, 10) + ' .....', bg: 'green'
+          title: 'Activity Delete Response',
+          text: 'Successfully deleted activity ' + this.dialogData.activity.title, bg: 'green'
         })
       },
       error: err => {
@@ -64,11 +75,11 @@ export class ConfirmDialogComponent {
   }
 
   deleteProjectImage() {
-    this.projectService.deleteProjectImage(this.dialogData._id).subscribe({
+    this.iEntityService.delete(this.dialogData._id).subscribe({
       next: res => {
         console.log(res);
         this.msgService.message({
-          title: 'Delete Response',
+          title: 'Image Delete Response',
           text: 'Successfully deleted image ' + this.dialogData.title, bg: 'green'
         })
       },

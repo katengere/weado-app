@@ -1,3 +1,5 @@
+import { Activity } from "./activity";
+
 export interface Project {
   author: string[];
   title: string;
@@ -6,6 +8,6 @@ export interface Project {
   reportsId: any;
   images: any;
   date: Date;
-  activities: string[];
+  activities: Activity[];
   _id: string
 }

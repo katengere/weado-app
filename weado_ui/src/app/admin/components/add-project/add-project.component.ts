@@ -1,12 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { Router } from '@angular/router';
-import { MessageService } from 'src/app/services/message.service';
-import { ProjectsService } from 'src/app/services/projects.service';
+import { Project } from '../../../Classes-Interfaces/project';
+import { AlertService } from '../../../entity-services/alert.service';
+import { ProjectEntityService } from '../../../entity-services/projectEntity/project-entity.service';
 
 @Component({
   selector: 'weado-add-project',
+  standalone: true,
+  imports: [MatDialogModule, ReactiveFormsModule, CommonModule],
   templateUrl: './add-project.component.html',
   styleUrls: ['./add-project.component.css']
 })
@@ -14,8 +18,8 @@ export class AddProjectComponent implements OnInit {
   projectForm: FormGroup;
 
   constructor(
-    private msgService: MessageService,
-    private projectService: ProjectsService,
+    private alertService: AlertService,
+    private projectEntityService: ProjectEntityService,
     private fb: FormBuilder,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) private dialogData: any
@@ -49,7 +53,7 @@ export class AddProjectComponent implements OnInit {
 
   onSubmit() {
     if (!this.projectForm.valid) {
-      return this.msgService.message({
+      return this.alertService.message({
         title: 'FORM ERROR',
         text: 'Please make sure to fill all required fields!', bg: 'red'
       });
@@ -63,16 +67,16 @@ export class AddProjectComponent implements OnInit {
     formData.append('fileDoc', this.projectForm.get('fileDoc')?.value)
     formData.append('date', this.projectForm.get('date'.toString())?.value)
 
-    this.projectService.addProject(formData).subscribe({
+    this.projectEntityService.add(formData as unknown as Project).subscribe({
       next: (project) => {
         this.projectForm.reset();
-        this.msgService.message({ title: 'SUCCESS', text: project.title.toUpperCase() + ': Successful added', bg: 'green' });
+        this.alertService.message({ title: 'SUCCESS', text: project.title.toUpperCase() + ': Successful added', bg: 'green' });
         this.router.navigateByUrl('/projects/' + new Date(project.date).getFullYear());
       },
       error: (err) => {
         console.log(err);
 
-        this.msgService.message({ title: 'SERVER ERROR', text: err.error.message, bg: 'red' });
+        this.alertService.message({ title: 'SERVER ERROR', text: err.error.message, bg: 'red' });
       }
     });
 

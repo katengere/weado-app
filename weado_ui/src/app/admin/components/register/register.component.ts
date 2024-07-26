@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatGridListModule } from '@angular/material/grid-list';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Classes-Interfaces/user';
-import { MessageService } from 'src/app/services/message.service';
+import { AlertService } from '../../../entity-services/alert.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'weado-register',
+  standalone: true,
+  imports: [MatGridListModule, MatCardModule, MatFormFieldModule, FormsModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -21,7 +27,7 @@ export class RegisterComponent {
   };
   constructor(
     private userService: UserService,
-    private msgService: MessageService,
+    private msgService: AlertService,
     private router: Router
   ) { }
 

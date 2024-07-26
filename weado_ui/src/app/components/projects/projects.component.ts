@@ -1,20 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'src/app/services/message.service';
-import { ProjectsService } from 'src/app/services/projects.service';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { AlertService } from '../../entity-services/alert.service';
+import { ProjectEntityService } from '../../entity-services/projectEntity/project-entity.service';
 
 @Component({
   selector: 'weado-projects',
+  standalone: true,
+  imports: [RouterLink, RouterOutlet, CommonModule],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
   years: number[] = [];
   constructor(
-    private projectsService: ProjectsService,
-    private msgService: MessageService
+    private projectsEntityService: ProjectEntityService,
+    private msgService: AlertService
   ) { }
   ngOnInit(): void {
-    this.projectsService.projects.subscribe({
+    this.projectsEntityService.entities$.subscribe({
       next: projects => this.years = projects.reduce((acc: number[], project) => {
         if (acc.includes(new Date(project.date).getFullYear())) {
           return acc;

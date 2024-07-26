@@ -4,6 +4,7 @@ export interface Report {
   author: string;
   summary: string;
   projectId: string;
+  fileUrl: string;
   rFile: any;
   createdOn: Date;
   modifiedOn: Date;

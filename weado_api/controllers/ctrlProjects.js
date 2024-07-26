@@ -18,17 +18,30 @@ function ctrlProjects(req, res, next) {
         });
 }
 
-function ctrlProjectSummary(req, res, next) {
-    const year = req.params.year;
-    const projectsList = ProjectsData.filter(project => new Date(project.date).getFullYear() == year);
-    res.status(200).json(projectsList);
-}
-
 function ctrlProjectDetails(req, res, next) {
     const _id = req.params._id;
-    Project.findById(_id).populate(['reportsId', 'images']).
-        then(result => result ? res.status(200).json(result) : res.status(404).json(`Project does not exist: Incorrect project id`)).
+    Project.findById(_id).then(result => {
+        result.activities.sort((a, b) => new Date(a.createdOn).getTime() - new Date(b.createdOn).getTime());
+        return result ? res.status(200).json(result) : res.status(404).json(`Project does not exist: Incorrect project id`)
+    }).
         catch(err => res.status(404).json(`Project does not exist: ${err}`));
+}
+
+const ctrlProjectUpdate = async (req, res) => {
+    const update = req.body;
+    console.log('update project ', update);
+    console.log('req param ', req.param._id);
+    try {
+        const updated = await Project.findById(req.param._id);
+        updated.reportsId = req.body.reportsId;
+        const savedProject = await updated.save();
+        console.log('updated project ', savedProject);
+        res.status(201).json(savedProject);
+    } catch (error) {
+        console.log('update project error ', error);
+        res.status(400).json(error);
+    }
+
 }
 
 function ctrlAddProject(req, res) {
@@ -116,7 +129,7 @@ function ctrlDeleteProject(req, res) {
 module.exports = {
     ctrlProjects,
     ctrlProjectDetails,
+    ctrlProjectUpdate,
     ctrlAddProject,
     ctrlDeleteProject,
-    ctrlProjectSummary,
 };

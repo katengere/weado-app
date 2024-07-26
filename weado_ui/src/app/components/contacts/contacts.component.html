@@ -1,8 +1,9 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-12">
         <div class="card">
-            <div class="card-header">
-                WEADO ADDRESS
+            <div class="card-header d-flex justify-content-between">
+                <span>WEADO ADDRESS</span>
+                <button class="btn btn-sm" (click)="messageDialog()">Leave a Message</button>
             </div>
             <div class="card-body">
                 <h5 class="card-title">P.O.BOX 807 SHINYANGA</h5>
@@ -16,26 +17,24 @@
             </div>
         </div>
     </div>
-    <form class="col-md-8" #form="ngForm" (ngSubmit)="onSubmit(form)">
-        <div class="mb-2">
-            <h3 class="text-white text-center">Leave A Message</h3>
-            <hr>
+</div>
+<hr>
+<div class="row">
+    <h5 class="text-decoration-underline text-center">Messages</h5>
+    <div class="col-12">
+        <div class="card  m-1 p-0 border-1" *ngFor="let message of messages | async">
+            <div class="card-body m-0 p-0 ">
+                <small class="card-header m-0 p-0 d-flex justify-content-between">
+                    <span>{{message.name}}</span>
+                    <span>{{message.email}}</span>
+                </small>
+                <p class="card-text">
+                    {{message.text}}
+                </p>
+            </div>
+            <div class="m-0 p-0 text-end">
+                {{message.createdOn | date}}
+            </div>
         </div>
-        <div class="mb-2">
-            <label for="Name" class="form-label"><i class="fa fa-user"></i> Name</label>
-            <input type="text" name="Name" #name="ngModel" [(ngModel)]="contact.name" class="form-control" required placeholder="Name">
-        </div>
-        <div class="mb-2">
-            <label for="email" class="form-label"><i class="fa fa-mail-bulk"></i> Email</label>
-            <input type="email" autocomplete="" name="email" #email="ngModel" [(ngModel)]="contact.email" required class="form-control" placeholder="Email">
-        </div>
-        <div class="mb-1">
-            <label for="message" class="form-label"><i class="fa fa-envelope"></i> Message</label>
-            <textarea name="message" #email="ngModel" [(ngModel)]="contact.message" required class="form-control" placeholder="Message" id="" cols="5" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn float-end text-white">
-          <i class="fa fa-comment"></i> Send!
-        </button>
-    </form>
-
+    </div>
 </div>

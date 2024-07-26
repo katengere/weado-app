@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { MessageEntityService } from './message-entity.service';
 
-import { MessageService } from './message.service';
-
-describe('MessageService', () => {
-  let service: MessageService;
+describe('UserEntityService', () => {
+  let service: MessageEntityService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MessageService);
+    service = TestBed.inject(MessageEntityService);
   });
 
   it('should be created', () => {

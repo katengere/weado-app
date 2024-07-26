@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from 'src/app/Classes-Interfaces/user';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/Classes-Interfaces/user';
 import { environment } from "../../../environments/environment";
 
 
@@ -14,10 +14,10 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  login(user: User):Observable<User>{
-    return this.http.post<User>(apiUrl+'/weado/admin/login', user);
+  login(user: User): Observable<User> {
+    return this.http.post<User>(apiUrl + '/users/login', user);
   }
-  register(user: FormData):Observable<User>{
-    return this.http.post<User>(apiUrl+'/weado/admin/register', user);
+  register(user: FormData): Observable<User> {
+    return this.http.post<User>(apiUrl + '/users/register', user);
   }
 }

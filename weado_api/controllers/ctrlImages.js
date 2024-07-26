@@ -5,6 +5,11 @@ const Image = mongoose.model('Image');
 const Project = mongoose.model('Project');
 const cloudinary = require('cloudinary').v2;
 
+const ctrlGetImages = async (req, res) => {
+    const images = await Image.find();
+    res.status(200).json(images);
+}
+
 function ctrlAddImage(req, res) {
     const file = req.files.file;
     const filePath = path.join(__dirname + '/../../tmp/' + file.name);
@@ -34,13 +39,13 @@ function ctrlAddImage(req, res) {
                     Project.findById(image.projectId).select('images').then(project => {
                         project.images.push(image._id);
                         project.save().then(proj => res.status(201).json(image)).
-                        catch(err => {
-                            fs.unlink(filePath, (err) => {
-                                if (err) throw err;
-                                console.log(file.name + ' was deleted');
+                            catch(err => {
+                                fs.unlink(filePath, (err) => {
+                                    if (err) throw err;
+                                    console.log(file.name + ' was deleted');
+                                });
+                                return res.status(400).json(err);
                             });
-                            return res.status(400).json(err);
-                        });
                     });
                 }).catch(err => {
                     console.log(err);
@@ -51,18 +56,18 @@ function ctrlAddImage(req, res) {
                     return res.status(400).json(err);
                 });
             }).
-            catch(err => {
-                console.log('cloudinary errror ', err);
-                fs.unlink(filePath, (err) => {
-                    if (err) throw err;
-                    console.log(file.name + ' was deleted');
+                catch(err => {
+                    console.log('cloudinary errror ', err);
+                    fs.unlink(filePath, (err) => {
+                        if (err) throw err;
+                        console.log(file.name + ' was deleted');
+                    });
+                    if (err.error.code === 'ENOTFOUND') {
+                        err.message = 'No internet connection';
+                        return res.status(404).json(err);
+                    }
+                    return res.status(400).json(err);
                 });
-                if (err.error.code === 'ENOTFOUND') {
-                    err.message = 'No internet connection';
-                    return res.status(404).json(err);
-                }
-                return res.status(400).json(err);
-            });
         }
     });
 }
@@ -107,6 +112,7 @@ function ctrlDeleteImage(req, res) {
 }
 
 module.exports = {
+    ctrlGetImages,
     ctrlAddImage,
     ctrlDeleteImage
 };

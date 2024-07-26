@@ -53,3 +53,4 @@ process.on('SIGTERM', () => {
 });
 
 require('./projects');
+require('./messages');

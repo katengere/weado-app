@@ -25,6 +25,30 @@ const imageSchema = new mongoose.Schema({
     createdOn: { type: Date, default: new Date() },
     modifiedOn: { type: Date, default: new Date() }
 });
+const activitySchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    activityReport: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Report'
+    },
+    budget: [{
+        item: { type: String, required: true },
+        cost: { type: String, required: true },
+        quantity: { type: String, required: true },
+        total: { type: String, required: true },
+    }],
+    images: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Image'
+    }],
+    projectId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Project'
+    },
+    createdOn: { type: Date, default: new Date() },
+    modifiedOn: { type: Date, default: new Date() }
+});
 const ProjectSchema = new mongoose.Schema({
     author: { type: [String], required: true },
     title: { type: String, required: true },
@@ -39,11 +63,15 @@ const ProjectSchema = new mongoose.Schema({
         ref: 'Image'
     }],
     date: { type: Date, default: new Date() },
-    activities: [String]
+    activities: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Activity'
+    }]
 }, {
     timestamps: true,
 });
 
 mongoose.model('Report', ReportSchema);
+mongoose.model('Activity', activitySchema);
 mongoose.model('Image', imageSchema);
 mongoose.model('Project', ProjectSchema);

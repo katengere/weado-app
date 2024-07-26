@@ -1,12 +1,12 @@
 <div class="row mx-1 justify-content-center">
-    <!-- <div class="col-md-2"></div> -->
-    <button [routerLink]="['/admin/manage']" routerLinkActive="active" class="btn mx-1 my-1 col-md-5">
-      <i class="fa fa-edit"></i> Manage
-    </button>
-    <button (click)="openAddProjectDialog()" routerLinkActive="active" class="btn mx-1 my-1 col-md-5">
-      <i class="fa fa-plus-circle"></i> Add Project
-    </button>
+  <!-- <div class="col-md-2"></div> -->
+  <button [routerLink]="['/weado/admin/manage']" routerLinkActive="active" class="btn mx-1 my-1 col-md-5">
+    <i class="fa fa-edit"></i> Manage
+  </button>
+  <button (click)="openAddProjectDialog()" routerLinkActive="active" class="btn mx-1 my-1 col-md-5">
+    <i class="fa fa-plus-circle"></i> Add Project
+  </button>
 </div>
 <div class="row">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

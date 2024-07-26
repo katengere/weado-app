@@ -1,5 +1,7 @@
 export interface Message {
-  title: string,
-  text: string,
-  bg: string
+  _id: string;
+  name: string;
+  email: string;
+  text: string;
+  createdOn: Date;
 }

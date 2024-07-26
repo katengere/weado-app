@@ -1,14 +1,16 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { FormsModule, NgForm } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { Router } from '@angular/router';
 import { Image } from 'src/app/Classes-Interfaces/image';
 import { Project } from 'src/app/Classes-Interfaces/project';
-import { MessageService } from 'src/app/services/message.service';
-import { ProjectsService } from 'src/app/services/projects.service';
+import { AlertService } from '../../../entity-services/alert.service';
+import { ImageEntityService } from '../../../entity-services/imageEntity/image-entity.service';
 
 @Component({
   selector: 'weado-add-images',
+  standalone: true,
+  imports: [MatDialogModule, FormsModule],
   templateUrl: './add-images.component.html',
   styleUrls: ['./add-images.component.css']
 })
@@ -16,8 +18,8 @@ export class AddImagesComponent implements OnInit {
   image!: Image
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: Project,
-    private msgService: MessageService,
-    private projectService: ProjectsService,
+    private alertService: AlertService,
+    private imageEntityService: ImageEntityService,
     private router: Router
   ) { }
   ngOnInit() {
@@ -26,7 +28,7 @@ export class AddImagesComponent implements OnInit {
   }
   onSubmit(form: NgForm) {
     if (!form.valid) {
-      return this.msgService.message({
+      return this.alertService.message({
         title: 'FORM ERROR',
         text: 'Please make sure to fill all required fields!', bg: 'red'
       });
@@ -37,10 +39,10 @@ export class AddImagesComponent implements OnInit {
     formData.append('file', this.image.file)
     formData.append('projectId', this.data._id as string)
 
-    this.projectService.addProjectImage(formData).subscribe({
+    this.imageEntityService.add(formData as unknown as Image).subscribe({
       next: (res) => {
         console.log(res);
-        this.msgService.message({
+        this.alertService.message({
           title: 'IMAGE UPLOAD SUCCESS',
           text: `Image Added Successfully to Project: ${res.title}`, bg: 'green'
         });
@@ -49,7 +51,7 @@ export class AddImagesComponent implements OnInit {
       error: (err) => {
         console.log(err);
 
-        return this.msgService.message({
+        return this.alertService.message({
           title: 'IMAGE UPLOAD ERROR',
           text: `Error uploading an image: ${err.error.message}`, bg: 'red'
         });

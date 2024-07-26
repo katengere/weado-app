@@ -29,20 +29,20 @@
                           </a>
                       </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['about']" routerLinkActive="active"
+                        <a class="nav-link" [routerLink]="['weado', 'about']" routerLinkActive="active"
                             data-bs-dismiss="offcanvas">
                             <i class="fa fa-info-circle"></i> ABOUT WEADO
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['projects', currentYear]" routerLinkActive="active"
+                        <a class="nav-link" [routerLink]="['weado', 'projects', currentYear]" routerLinkActive="active"
                             data-bs-dismiss="offcanvas">
                             <i class="fa fa-tasks"></i> PROJECTS
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['contacts']" routerLinkActive="active"
+                        <a class="nav-link" [routerLink]="['weado', 'contacts']" routerLinkActive="active"
                             data-bs-dismiss="offcanvas">
                             <i class="fa fa-mobile-alt"></i> CONTACTS
                         </a>
@@ -58,8 +58,8 @@
                         <ul class="dropdown-menu dropdown-menu-end" style="background-color: rgb(161, 156, 156);"
                             aria-labelledby="dropdownMenuButton1">
                             <li class="nav-item">
-                                <a class="dropdown-item" [routerLink]="['/admin/manage']" routerLinkActive="active"
-                                    data-bs-dismiss="offcanvas">
+                                <a class="dropdown-item" [routerLink]="['/weado/admin/manage']"
+                                    routerLinkActive="active" data-bs-dismiss="offcanvas">
                                     <i class="fa fa-user-graduate"></i> Super User
                                 </a>
                             </li>
@@ -72,7 +72,7 @@
                         </ul>
                     </li>
                     <li class="nav-item" *ngIf="!isLoggedIn()">
-                        <a class="nav-link" [routerLink]="['/admin/login']" routerLinkActive="active"
+                        <a class="nav-link" [routerLink]="['/weado/admin/login']" routerLinkActive="active"
                             data-bs-dismiss="offcanvas">
                             <i class="fa fa-sign-in-alt"></i> Login
                         </a>
@@ -85,7 +85,7 @@
 <div class="row" style="margin-top: 68px;">
     <router-outlet></router-outlet>
 </div>
-<div class="row" [ngClass]="{'fixed-bottom': !isLoggedIn() || years.length==1}">
+<div class="row" [ngClass]="{'fixed-bottom': url == '/weado/admin/login'}">
     <footer class="col-12 card-header mt-3 border-top text-center">
         Copyright &copy; WEADO <br> 2023
     </footer>

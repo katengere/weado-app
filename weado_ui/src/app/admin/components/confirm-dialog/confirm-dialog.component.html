@@ -1,24 +1,28 @@
 <h5 mat-dialog-title class="card-title">
-    Delete {{dialogData.context}}: {{dialogData.title || dialogData.activity.slice(0, 10) + ' .....'}}
+  Delete {{dialogData.context}}: {{dialogData.title || dialogData.activity.title}}
 </h5>
 <mat-dialog-content class="card-text">
-    Are you sure to delete this {{dialogData.context}}??
+  Are you sure to delete this {{dialogData.context}}??
 </mat-dialog-content>
 
 <mat-dialog-actions align="end" class="card-footer">
-    <button mat-raised-button mat-dialog-close class="btn btn-sm">
-      <i class="fa fa-window-close"></i>Close
-    </button>
-    <button mat-raised-button *ngIf="dialogData.context=='Project'" mat-dialog-close class="btn bg-danger btn-sm" (click)="deleteProject()">
-      <i class="fa fa-trash"></i>Delete
-    </button>
-    <button mat-raised-button *ngIf="dialogData.context=='Report'" mat-dialog-close class="btn bg-danger btn-sm" (click)="deleteProjectReport()">
-      <i class="fa fa-trash"></i>Delete
-    </button>
-    <button mat-raised-button *ngIf="dialogData.context=='Image'" mat-dialog-close class="btn bg-danger btn-sm" (click)="deleteProjectImage()">
-      <i class="fa fa-trash"></i>Delete
-    </button>
-    <button mat-raised-button *ngIf="dialogData.context=='Activity'" mat-dialog-close class="btn bg-danger btn-sm" (click)="deleteProjectActivity()">
-      <i class="fa fa-trash"></i>Delete
-    </button>
+  <button mat-raised-button mat-dialog-close class="btn btn-sm">
+    <i class="fa fa-window-close"></i>Close
+  </button>
+  <button mat-raised-button *ngIf="dialogData.context=='Project'" mat-dialog-close class="btn bg-danger btn-sm"
+    (click)="deleteProject()">
+    <i class="fa fa-trash"></i>Delete
+  </button>
+  <button mat-raised-button *ngIf="dialogData.context=='Report'" mat-dialog-close class="btn bg-danger btn-sm"
+    (click)="deleteProjectReport()">
+    <i class="fa fa-trash"></i>Delete
+  </button>
+  <button mat-raised-button *ngIf="dialogData.context=='Image'" mat-dialog-close class="btn bg-danger btn-sm"
+    (click)="deleteProjectImage()">
+    <i class="fa fa-trash"></i>Delete
+  </button>
+  <button mat-raised-button *ngIf="dialogData.context=='Activity'" mat-dialog-close class="btn bg-danger btn-sm"
+    (click)="deleteProjectActivity()">
+    <i class="fa fa-trash"></i>Delete
+  </button>
 </mat-dialog-actions>

@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
+import { RouterLink } from '@angular/router';
 import { ConfirmDialogComponent } from 'src/app/admin/components/confirm-dialog/confirm-dialog.component';
 import { Project } from 'src/app/Classes-Interfaces/project';
-import { MessageService } from 'src/app/services/message.service';
-import { ProjectsService } from 'src/app/services/projects.service';
+import { AlertService } from '../../../entity-services/alert.service';
+import { ProjectEntityService } from '../../../entity-services/projectEntity/project-entity.service';
 import { AddProjectComponent } from '../add-project/add-project.component';
 
 interface GroupedProjects {
@@ -11,6 +13,8 @@ interface GroupedProjects {
 }
 @Component({
   selector: 'weado-project-list',
+  standalone: true,
+  imports: [CommonModule, RouterLink],
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.css']
 })
@@ -18,13 +22,13 @@ export class ProjectListComponent implements OnInit {
   projects: GroupedProjects[] = [];
   projects2: Project[] = [];
   constructor(
-    private projectService: ProjectsService,
-    private msgService: MessageService,
+    private projectEntityService: ProjectEntityService,
+    private alertService: AlertService,
     private dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.projectService.projects.subscribe({
+    this.projectEntityService.entities$.subscribe({
       next: (projs) => {
         console.log(projs);
 
@@ -47,7 +51,7 @@ export class ProjectListComponent implements OnInit {
         }, []);
       },
       error: (err) => {
-        this.msgService.message({ title: '', text: err.message, bg: 'red' });
+        this.alertService.message({ title: '', text: err.message, bg: 'red' });
       }
     });
   }
@@ -66,11 +70,11 @@ export class ProjectListComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
-          this.msgService.message({ title: 'Delete Error', text: err, bg: 'red' });
+          this.alertService.message({ title: 'Delete Error', text: err, bg: 'red' });
         }
       });
     } else {
-      this.msgService.message({ title: 'Delete Error', text: 'Unknown project id', bg: 'red' });
+      this.alertService.message({ title: 'Delete Error', text: 'Unknown project id', bg: 'red' });
     }
   }
 

@@ -1,13 +1,16 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { FormsModule, NgForm } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { Router } from '@angular/router';
-import { MessageService } from 'src/app/services/message.service';
-import { ProjectsService } from 'src/app/services/projects.service';
 import { Report } from "../../../Classes-Interfaces/report";
+import { AlertService } from '../../../entity-services/alert.service';
+import { ProjectEntityService } from '../../../entity-services/projectEntity/project-entity.service';
+import { ReportEntityService } from '../../../entity-services/reportEntity/report-entity.service';
 
 @Component({
   selector: 'weado-add-report',
+  standalone: true,
+  imports: [MatDialogModule, FormsModule],
   templateUrl: './add-report.component.html',
   styleUrls: ['./add-report.component.css']
 })
@@ -20,17 +23,19 @@ export class AddReportComponent implements OnInit {
     createdOn: new Date(),
     modifiedOn: new Date(),
     summary: '',
-    _id: ''
+    _id: '',
+    fileUrl: ''
   }
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: any,
-    private msgService: MessageService,
-    private projectService: ProjectsService,
+    @Inject(MAT_DIALOG_DATA) private dialogData: any,
+    private msgService: AlertService,
+    private projectEntityService: ProjectEntityService,
+    private reportEntityService: ReportEntityService,
     private router: Router
   ) { }
   ngOnInit() {
-    this.report = this.data
-    console.log(this.report);
+    this.report.projectId = this.dialogData.project._id;
+    console.log(this.dialogData);
   }
   onSubmit(form: NgForm) {
     if (!form.valid) {
@@ -46,16 +51,18 @@ export class AddReportComponent implements OnInit {
     formData.append('rFile', this.report.rFile)
     formData.append('projectId', this.report.projectId)
 
-    this.projectService.addProjectReport(formData).subscribe({
-      next: (res: any) => {
-        console.log(res);
-        this.router.navigateByUrl('/admin/manage/details/' + res._id);
+
+    this.reportEntityService.add(formData as unknown as Report).subscribe({
+      next: (report: any) => {
+        console.log(report);
+        this.projectEntityService.getAll();
         return this.msgService.message({
           title: 'REPORT SUBMIT SUCCESS',
-          text: `Successfully added Report: ${this.data.title}`, bg: 'red'
+          text: `Successfully added Report: ${this.report.title}`, bg: 'red'
         });
       },
       error: (err: any) => {
+        console.log('error adding a report ', err);
         return this.msgService.message({
           title: 'REPORT SUBMIT ERROR',
           text: `Error submiting a report: ${err}`, bg: 'red'
